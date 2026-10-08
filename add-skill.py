@@ -157,8 +157,8 @@ def main():
     print("  Repo : %s/tree/main/skills/%s" % (REPO_URL, name))
     print("  Web  : %s" % WEB_URL)
     print()
-    print("  Trang web co the mat toi 15 phut moi doi, vi no nho dem danh sach.")
-    print("  Muon thay ngay thi bam Ctrl+F5 hoac mo cua so an danh.")
+    print("  Trang web nho dem danh sach 3 phut. Muon thay ngay thi bam nut")
+    print("  'Lam moi danh sach' ngay duoi danh sach skill tren trang.")
 
 
 if __name__ == "__main__":
