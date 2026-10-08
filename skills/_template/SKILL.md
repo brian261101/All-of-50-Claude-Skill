@@ -1,6 +1,6 @@
 ---
 name: _template
-description: Mẫu trống để tạo skill mới. Chép cả thư mục này sang một ô slot-NN, đổi tên thư mục thành tên skill, rồi sửa hai dòng name và description ở trên. Trang web bỏ qua mọi thư mục bắt đầu bằng dấu gạch dưới.
+description: Mẫu trống để tạo skill mới. Chép cả thư mục này vào skills/, đổi tên thư mục thành tên skill, rồi sửa hai dòng name và description ở trên. Trang web bỏ qua mọi thư mục bắt đầu bằng dấu gạch dưới.
 ---
 
 # Tên skill

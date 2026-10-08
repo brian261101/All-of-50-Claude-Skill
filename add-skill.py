@@ -10,7 +10,7 @@ Hoac keo tha thu muc skill vao file "Them skill.bat".
 Script se:
   1. kiem tra thu muc co SKILL.md khong
   2. lay ten tu dong 'name:' trong SKILL.md, khong co thi lay ten thu muc
-  3. tim o slot-NN con trong dau tien va dat skill vao do
+  3. chep vao skills/<ten-skill>/
   4. git add / commit / push
 
 Khong co gi phai sua o trang web - no doc thang cau truc repo nay.
@@ -80,18 +80,6 @@ def ensure_identity():
     print("  Da dat danh tinh git cho repo nay: %s <%s>" % (login, mail))
 
 
-def free_slot():
-    """O slot-NN dau tien chua dung (chi chua .gitkeep hoac rong)."""
-    for d in sorted(os.listdir(SKILLS)):
-        if not re.match(r"^slot-\d+$", d):
-            continue
-        p = os.path.join(SKILLS, d)
-        files = [f for f in os.listdir(p) if f != ".gitkeep"]
-        if not files:
-            return d
-    return None
-
-
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -120,16 +108,6 @@ def main():
     if os.path.isdir(dest):
         print("  Thu muc '%s' da co san - se ghi de noi dung." % name)
         shutil.rmtree(dest)
-        slot = None
-    else:
-        slot = free_slot()
-        if slot is None:
-            print("  Khong con o slot-NN trong, tao thu muc moi.")
-
-    # chiem mot o trong neu con
-    if slot:
-        shutil.rmtree(os.path.join(SKILLS, slot))
-        print("  Dung o %s -> doi ten thanh '%s'" % (slot, name))
 
     shutil.copytree(src, dest)
     # bo rac khong can day len

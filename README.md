@@ -9,7 +9,7 @@ thư mục của repo này, nên **không có bước build nào cả**.
 ### Cách 1 — kéo thả (dễ nhất)
 
 Kéo **thư mục skill** thả vào file **`Them skill.bat`**. Script tự lấy tên từ
-`name:` trong `SKILL.md`, chiếm một ô trống, rồi commit và push.
+`name:` trong `SKILL.md`, tạo thư mục tương ứng trong `skills/`, rồi commit và push.
 
 Chạy từ dòng lệnh cũng được:
 
@@ -27,19 +27,18 @@ cd All-of-50-Claude-Skill
 
 ### Cách 2 — bằng tay
 
-1. Chép thư mục skill vào một ô trống bất kỳ trong `skills/` (`slot-01` … `slot-50`).
-2. Đổi tên thư mục `slot-NN` thành tên skill, xoá `.gitkeep` trong đó.
+1. Chép thư mục skill vào `skills/`.
+2. Đặt tên thư mục đúng bằng tên skill.
 3. `git add -A && git commit -m "Thêm skill X" && git push`.
 
 ### Cách 3 — qua giao diện web GitHub
 
-Vào `skills/<ô trống>`, bấm **Add file → Upload files**, kéo các file của skill
-vào rồi **Commit changes**.
+Vào thư mục `skills/`, bấm **Add file → Upload files**, kéo cả thư mục skill vào
+rồi **Commit changes**. GitHub giữ nguyên tên thư mục bạn kéo vào.
 
-> Giao diện web **không đổi tên thư mục được**. Muốn đổi thì mở file trong thư
-> mục đó, bấm bút chì sửa, rồi thay đường dẫn ở ô tên file — ví dụ đổi
-> `slot-02/SKILL.md` thành `Equipment_tech/SKILL.md`. GitHub tự tạo thư mục mới
-> và bỏ thư mục cũ.
+> Nếu lỡ đặt sai tên thư mục: mở file bên trong, bấm bút chì sửa, rồi thay
+> đường dẫn ngay ở ô tên file — ví dụ đổi `ten-cu/SKILL.md` thành
+> `ten-moi/SKILL.md`. GitHub tự tạo thư mục mới và bỏ thư mục cũ.
 
 Trang web tự xuất hiện thêm một dòng tải về. Không phải sửa gì bên trang web,
 không phải cập nhật danh sách nào.
@@ -49,7 +48,7 @@ không phải cập nhật danh sách nào.
 | | |
 |---|---|
 | Một thư mục được coi là **skill đã xuất bản** | khi nó chứa file `SKILL.md` |
-| Thư mục chỉ có `.gitkeep` | là ô trống, trang web bỏ qua |
+| Thư mục không có `SKILL.md` | trang web bỏ qua |
 | Thư mục bắt đầu bằng `_` | bị bỏ qua (ví dụ `_template`) |
 | Tên hiển thị | lấy từ `name:` trong `SKILL.md`, không có thì lấy tên thư mục |
 | Phần giới thiệu | lấy từ `description:` trong `SKILL.md` |
