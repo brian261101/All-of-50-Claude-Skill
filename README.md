@@ -6,9 +6,40 @@ thư mục của repo này, nên **không có bước build nào cả**.
 
 ## Thêm một skill
 
+### Cách 1 — kéo thả (dễ nhất)
+
+Kéo **thư mục skill** thả vào file **`Them skill.bat`**. Script tự lấy tên từ
+`name:` trong `SKILL.md`, chiếm một ô trống, rồi commit và push.
+
+Chạy từ dòng lệnh cũng được:
+
+```bash
+python add-skill.py "C:\duong\dan\den\skill"
+python add-skill.py "C:\duong\dan\den\skill" ten-khac   # đặt tên khác
+```
+
+Lần đầu phải lấy repo về máy:
+
+```bash
+git clone https://github.com/brian261101/All-of-50-Claude-Skill.git
+cd All-of-50-Claude-Skill
+```
+
+### Cách 2 — bằng tay
+
 1. Chép thư mục skill vào một ô trống bất kỳ trong `skills/` (`slot-01` … `slot-50`).
-2. Đổi tên thư mục `slot-NN` thành tên skill.
-3. `git add . && git commit && git push`.
+2. Đổi tên thư mục `slot-NN` thành tên skill, xoá `.gitkeep` trong đó.
+3. `git add -A && git commit -m "Thêm skill X" && git push`.
+
+### Cách 3 — qua giao diện web GitHub
+
+Vào `skills/<ô trống>`, bấm **Add file → Upload files**, kéo các file của skill
+vào rồi **Commit changes**.
+
+> Giao diện web **không đổi tên thư mục được**. Muốn đổi thì mở file trong thư
+> mục đó, bấm bút chì sửa, rồi thay đường dẫn ở ô tên file — ví dụ đổi
+> `slot-02/SKILL.md` thành `Equipment_tech/SKILL.md`. GitHub tự tạo thư mục mới
+> và bỏ thư mục cũ.
 
 Trang web tự xuất hiện thêm một dòng tải về. Không phải sửa gì bên trang web,
 không phải cập nhật danh sách nào.
