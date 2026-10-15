@@ -1,0 +1,10 @@
+{
+  "_comment": "TEMPLATE ONLY. This is not a ready-to-run MCP config. Replace the example with the exact server command, arguments, environment and scope from a reviewed FreeCAD MCP project's current documentation.",
+  "mcpServers": {
+    "freecad": {
+      "command": "REPLACE_WITH_REVIEWED_SERVER_COMMAND",
+      "args": [],
+      "env": {}
+    }
+  }
+}
