@@ -1,0 +1,24 @@
+{
+  "name": "Cross-implementation benchmark: LaelaZorana/asme-viii-pressure-vessel example (US units)",
+  "source": "README.md and tests/test_asme_viii.py of LaelaZorana/asme-viii-pressure-vessel @ 24c20bb0c707 (MIT). Values produced by that independent implementation and its hand arithmetic, not by ASME.",
+  "inputs_common": "60 in ID drum, P = 250 psi, S = 20000 psi (representative SA-516-70), E = 0.85 spot RT, CA = 0.125 in, 2:1 heads E = 1.0, shell 0.625 in nominal",
+  "cases": [
+    {"id": "LZ1", "title": "Shell UG-27(c)(1)", "function": "shell_t_circ",
+     "inputs_us": {"P_psi": 250, "R_in": 30.125, "S_psi": 20000, "E": 0.85},
+     "expected_us": {"value_in": 0.44696}, "tolerance_rel": 1e-4, "method_difference": null},
+    {"id": "LZ2", "title": "2:1 head UG-32", "function": "ellipsoidal_t",
+     "inputs_us": {"P_psi": 250, "D_in": 60.25, "S_psi": 20000, "E": 1.0},
+     "expected_us": {"value_in": 0.37703}, "tolerance_rel": 1e-4, "method_difference": null},
+    {"id": "LZ3", "title": "Shell MAWP at corroded t = 0.5 in", "function": "shell_mawp_circ",
+     "inputs_us": {"t_in": 0.5, "R_in": 30.125, "S_psi": 20000, "E": 0.85},
+     "expected_us": {"value_psi": 279.38}, "tolerance_rel": 1e-4, "method_difference": null},
+    {"id": "LZ4", "title": "Torispherical head, App. 1-4(d), L = 60 in, r = 3.6 in", "function": "torispherical_t",
+     "inputs_us": {"P_psi": 250, "L_in": 60, "r_in": 3.6, "S_psi": 20000, "E": 1.0},
+     "expected_us": {"value_in": 0.66481}, "tolerance_rel": 1e-4, "method_difference": null},
+    {"id": "LZ5", "title": "Nozzle N1 required area A (NPS 8 Sch 80, SA-106-B in SA-516-70)", "function": "area_A_us",
+     "inputs_us": {"OD_in": 8.625, "tw_in": 0.5, "CA_in": 0.125, "P_psi": 250, "R_in": 30.125, "S_psi": 20000,
+                   "Sn_psi": 17100, "mill_tol": 0.125},
+     "expected_us": {"value_in2": 3.070}, "tolerance_rel": 2e-3,
+     "method_difference": "The reference library deducts the 12.5 % pipe undertolerance from tn and enlarges d accordingly (a conservative choice it documents). This library follows UG-16(d), which exempts UG-37/UG-40 reinforcement areas from the undertolerance. The benchmark is run with the reference convention to show the area formula agrees; the default convention is expected to give a smaller A (about 3.03 in2). The difference is reported, not adjusted away."}
+  ]
+}

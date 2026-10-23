@@ -1,0 +1,74 @@
+# =============================================================================
+# pv-design API 650 tank input — DEMONSTRATION DATA, NOT FOR FABRICATION
+# API 650 constants below (minimum thickness table, bottom minimum, 1-foot
+# method limit, scope limits) are REPRESENTATIVE values typed from general
+# literature for the demonstration. Confirm every one against the licensed
+# edition before use (set status: USER_SUPPLIED_VERIFIED with your name/date).
+# =============================================================================
+schema: pv-design/tank@1
+
+project:
+  project_id: TK-DEMO-001
+  equipment_tag: T-201
+  description: Atmospheric fire-water storage tank (demonstration)
+  design_code: API_650
+  code_edition: "project to state (edition and addendum)"
+  revision: "00"
+  data_status: DEMO_SAMPLE
+
+design_basis: {locked: false}
+
+process:
+  fluid: Fresh water
+  design_specific_gravity: 1.0
+  test_specific_gravity: 1.0
+  design_liquid_level: 8.6 m
+  internal_pressure: 0 kPa
+  external_pressure: 0 kPa
+  design_metal_temperature: 10 degC
+  max_design_temperature: 50 degC
+  corrosion_allowance_shell: 1.5 mm
+  corrosion_allowance_bottom: 1.5 mm
+
+scope_limits:
+  max_internal_pressure: 0 kPa          # basic design, atmospheric (demo)
+  max_external_pressure: 0.25 kPa
+  max_design_temperature: 93 degC
+  basis: "DEMO representative values — confirm against the licensed API 650 edition"
+
+materials:
+  A283C:
+    spec: ASTM A283/A283M Grade C
+    Fy: 205 MPa
+    Fu: 380 MPa
+    Sd: 137 MPa
+    St: 154 MPa
+    density: 7850 kg/m3
+    source: "representative Table 5-2 values (DEMO) — verify"
+    verification_status: REPRESENTATIVE_EXAMPLE
+
+api650_rules:
+  status: REPRESENTATIVE_EXAMPLE
+  min_shell_thickness:
+    - {max_diameter: 15 m, thickness: 5 mm}
+    - {max_diameter: 36 m, thickness: 6 mm}
+    - {max_diameter: 60 m, thickness: 8 mm}
+    - {max_diameter: inf, thickness: 10 mm}
+  bottom_min_thickness: 6 mm
+  one_foot_method_max_diameter: 61 m
+
+geometry:
+  nominal_diameter: 10 m
+  shell_height: 9 m
+  courses:                               # bottom to top
+    - {id: "1", height: 1.8 m, material: A283C, nominal_thickness: auto}
+    - {id: "2", height: 1.8 m, material: A283C, nominal_thickness: auto}
+    - {id: "3", height: 1.8 m, material: A283C, nominal_thickness: auto}
+    - {id: "4", height: 1.8 m, material: A283C, nominal_thickness: auto}
+    - {id: "5", height: 1.8 m, material: A283C, nominal_thickness: auto}
+  bottom_plate_thickness: 8 mm
+  bottom_material: A283C
+  roof: self-supported cone (not designed in v0.1)
+
+fabrication:
+  plate_thicknesses: {values: [5, 6, 8, 10, 12, 14, 16], unit: mm}

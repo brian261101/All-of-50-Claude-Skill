@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pressure-vessel-design"
+version = "0.1.0"
+description = "Traceable ASME VIII-1 / API 650 design calculations, FreeCAD model, drawings and BOM (engineering-review tool, not for fabrication)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []                     # the calculation core is standard library only
+
+[project.optional-dependencies]
+yaml = ["pyyaml>=6"]                  # YAML input (JSON works without it)
+report = ["pymupdf>=1.24"]            # PDF report and drawing PDFs
+bom = ["openpyxl>=3.1"]               # BOM.xlsx
+drawings = ["ezdxf>=1.3", "cadquery-ocp>=7.7"]   # DXF sheets, hidden-line projections
+all = ["pyyaml>=6", "pymupdf>=1.24", "openpyxl>=3.1", "ezdxf>=1.3", "cadquery-ocp>=7.7"]
+
+[project.scripts]
+pressure-vessel = "pressure_vessel.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

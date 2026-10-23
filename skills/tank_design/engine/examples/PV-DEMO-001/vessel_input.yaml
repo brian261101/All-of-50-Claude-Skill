@@ -1,0 +1,261 @@
+# =============================================================================
+# pv-design vessel input — DEMONSTRATION DATA, NOT FOR FABRICATION
+# Every value below is sample data invented to exercise the software. Material
+# allowables are REPRESENTATIVE_EXAMPLE records and flange data are
+# representative values; neither has been checked against the licensed
+# standards. Rules: every dimensional value carries its unit; "none" means
+# "not provided" (the matching check becomes NOT_EVALUATED, it is never
+# defaulted); not-applicable items need {not_applicable: "<reason>"}.
+# =============================================================================
+schema: pv-design/vessel@1
+
+project:
+  project_id: PV-DEMO-001
+  equipment_tag: V-101
+  description: Vertical compressed-air receiver (demonstration)
+  customer: Internal demonstration
+  design_code: ASME_VIII_1
+  code_edition: "2023"
+  addenda: none
+  units_system: SI
+  design_status: PRELIMINARY
+  revision: "00"
+  data_status: DEMO_SAMPLE          # DEMO_SAMPLE | USER_CONFIRMED
+  jurisdiction: TBD — confirm national inspection rules at the installation site
+  prepared_by: pressure_vessel 0.1.0 (automated)
+  date: "2026-10-23"
+
+design_basis:
+  locked: false                     # true only after the user confirms all inputs
+  confirmed_by: none
+  confirmed_on: none
+  notes:
+    - Demonstration dataset; not a real equipment design.
+
+process:
+  fluid: Compressed air (dry)
+  fluid_phase: gas
+  lethal_service: false
+  cyclic_service: false
+  operating_pressure: 0.8 MPa(g)
+  design_pressure: 1.0 MPa(g)
+  operating_temperature: 40 degC
+  design_temperature: 80 degC
+  mdmt: -10 degC
+  external_pressure: 0.1 MPa        # vacuum case on drain-down (demo)
+  external_design_temperature: 80 degC
+  required_volume: 3.5 m3
+  liquid_level: none
+  liquid_density: none
+  corrosion_allowance: 1.5 mm
+  test_type: hydrostatic
+  test_basis: MAWP                  # MAWP | design_pressure
+  test_temperature: 20 degC
+  test_position: vertical
+  test_fluid_density: 1000 kg/m3
+
+materials:
+  PLATE:   {db_id: SA-516-70_PLATE_REP}
+  PIPE:    {db_id: SA-106-B_PIPE_REP}
+  FORGING: {db_id: SA-105_FORGING_REP}
+  STRUCT:  {non_pressure: true, spec: "ASTM A36 / JIS G3101 SS400", density: 7850 kg/m3,
+            min_yield: 235 MPa, verification_status: REPRESENTATIVE_EXAMPLE}
+
+flange_types:
+  B165-150-WN-4:
+    standard: ASME B16.5
+    class: 150
+    type: WN
+    facing: RF
+    dimensions_source: representative ASME B16.5 Class 150 NPS 4 values (DEMO, verify)
+    dimensions_status: REPRESENTATIVE_EXAMPLE
+    dimensions: {od: 228.6 mm, thickness: 23.9 mm, hub_od: 134.9 mm, length_through_hub: 76.2 mm,
+                 bolt_circle: 190.5 mm, bolt_holes: 8, bolt_hole_diameter: 19.1 mm, bolt_size: 5/8 in,
+                 raised_face_od: 157.2 mm, raised_face_height: 1.6 mm}
+  B165-150-WN-2:
+    standard: ASME B16.5
+    class: 150
+    type: WN
+    facing: RF
+    dimensions_source: representative ASME B16.5 Class 150 NPS 2 values (DEMO, verify)
+    dimensions_status: REPRESENTATIVE_EXAMPLE
+    dimensions: {od: 152.4 mm, thickness: 19.1 mm, hub_od: 77.7 mm, length_through_hub: 63.5 mm,
+                 bolt_circle: 120.7 mm, bolt_holes: 4, bolt_hole_diameter: 19.1 mm, bolt_size: 5/8 in,
+                 raised_face_od: 92.1 mm, raised_face_height: 1.6 mm}
+  B165-150-WN-1:
+    standard: ASME B16.5
+    class: 150
+    type: WN
+    facing: RF
+    dimensions_source: representative ASME B16.5 Class 150 NPS 1 values (DEMO, verify)
+    dimensions_status: REPRESENTATIVE_EXAMPLE
+    dimensions: {od: 108.0 mm, thickness: 14.2 mm, hub_od: 49.3 mm, length_through_hub: 55.6 mm,
+                 bolt_circle: 79.4 mm, bolt_holes: 4, bolt_hole_diameter: 15.9 mm, bolt_size: 1/2 in,
+                 raised_face_od: 50.8 mm, raised_face_height: 1.6 mm}
+  B165-150-WN-18:
+    standard: ASME B16.5
+    class: 150
+    type: WN
+    facing: RF
+    dimensions_source: representative ASME B16.5 Class 150 NPS 18 values (DEMO, verify)
+    dimensions_status: REPRESENTATIVE_EXAMPLE
+    dimensions: {od: 635.0 mm, thickness: 39.6 mm, hub_od: 505.0 mm, length_through_hub: 112.7 mm,
+                 bolt_circle: 577.9 mm, bolt_holes: 16, bolt_hole_diameter: 31.8 mm, bolt_size: 1-1/8 in,
+                 raised_face_od: 533.4 mm, raised_face_height: 1.6 mm}
+
+geometry:
+  orientation: vertical
+  diameter_basis: ID
+  diameter: 1200 mm
+  tangent_to_tangent: 3000 mm
+  bottom_tangent_elevation: 1000 mm       # above underside of leg base plates (grade)
+  shell_courses:                           # bottom to top; sum + head straight flanges = T/T
+    - {id: C1, length: 1500 mm, material: PLATE, nominal_thickness: auto, long_seam_orientation: 30 deg}
+    - {id: C2, length: 1420 mm, material: PLATE, nominal_thickness: auto, long_seam_orientation: 210 deg}
+  heads:
+    top:
+      type: ellipsoidal
+      aspect_ratio: 2.0                    # D/2h
+      straight_flange: 40 mm
+      material: PLATE
+      construction: seamless
+      nominal_thickness: 8 mm
+      min_thickness_after_forming: 7.0 mm  # to be guaranteed by the head maker (demo)
+    bottom:
+      type: ellipsoidal
+      aspect_ratio: 2.0
+      straight_flange: 40 mm
+      material: PLATE
+      construction: seamless
+      nominal_thickness: 8 mm
+      min_thickness_after_forming: 7.0 mm
+  nozzles:
+    # orientation: plan angle clockwise from 0 deg (plant north), seen from above
+    # elevation: shell nozzles, centreline above the bottom tangent line
+    # projection: vessel outside surface at the nozzle centreline to flange face
+    # Rev 00 iteration note: the first run returned NZ-N1/N2-UG37 FAIL without a
+    # pad (A = 448 mm2 required, 354 mm2 available), so 8 mm x 200 mm pads were added.
+    - tag: N1
+      service: Air inlet
+      location: shell
+      elevation: 2500 mm
+      orientation: 0 deg
+      projection: 200 mm
+      neck: {type: pipe, nps: 4, schedule: "80", material: PIPE}
+      attachment: set_in
+      flange: {type_ref: B165-150-WN-4, material: FORGING,
+               rating_at_design_temperature: 1.83 MPa,
+               rating_source: "DEMO value read from memory of B16.5 Table 2-1.1 (Group 1.1, 80 degC) — verify",
+               rating_status: USER_SUPPLIED_UNVERIFIED}
+      pad: {thickness: 8 mm, outside_diameter: 200 mm, material: PLATE}
+      welds: none
+    - tag: N2
+      service: Air outlet
+      location: shell
+      elevation: 400 mm
+      orientation: 180 deg
+      projection: 200 mm
+      neck: {type: pipe, nps: 4, schedule: "80", material: PIPE}
+      attachment: set_in
+      flange: {type_ref: B165-150-WN-4, material: FORGING, rating_at_design_temperature: none}
+      pad: {thickness: 8 mm, outside_diameter: 200 mm, material: PLATE}
+      welds: none
+    - tag: N3
+      service: Drain
+      location: bottom_head
+      projection: 150 mm
+      neck: {type: pipe, nps: 1, schedule: "160", material: PIPE}
+      attachment: set_in
+      flange: {type_ref: B165-150-WN-1, material: FORGING, rating_at_design_temperature: none}
+      pad: none
+      welds: none
+    - tag: N4
+      service: Safety valve
+      location: top_head
+      projection: 200 mm
+      neck: {type: pipe, nps: 2, schedule: "160", material: PIPE}
+      attachment: set_in
+      flange: {type_ref: B165-150-WN-2, material: FORGING, rating_at_design_temperature: none}
+      pad: none
+      welds: none
+    - tag: N5
+      service: Pressure gauge
+      location: shell
+      elevation: 2500 mm
+      orientation: 90 deg
+      projection: 150 mm
+      neck: {type: pipe, nps: 1, schedule: "160", material: PIPE}
+      attachment: set_in
+      flange: {type_ref: B165-150-WN-1, material: FORGING, rating_at_design_temperature: none}
+      pad: none
+      welds: none
+    - tag: M1
+      service: Manway
+      location: shell
+      elevation: 900 mm
+      orientation: 270 deg
+      projection: 250 mm
+      access_opening: true
+      neck: {type: plate, od: 457 mm, thickness: 12 mm, material: PLATE, equivalent_nps: "18",
+             seam_joint_efficiency: 0.85}    # rolled plate, Type 1 long seam, spot RT
+      attachment: set_in
+      flange: {type_ref: B165-150-WN-18, material: FORGING, rating_at_design_temperature: none,
+               blind_cover: true, supply_bolting: true,
+               gasket: "Flat ring gasket NPS 18 Cl150 RF, ASME B16.21 (material TBD)",
+               bolting: "Stud bolts SA-193 B7 with 2 heavy hex nuts SA-194 2H each (length TBD)"}
+      pad: {thickness: 8 mm, outside_diameter: 800 mm, material: PLATE}
+      welds: none
+  supports:
+    type: legs
+    count: 4
+    orientation_start: 45 deg
+    top_elevation: 400 mm                  # top of leg above the bottom tangent line
+    leg: {section: "Pipe 114.3x6.02 (DN100 SCH40)", od: 114.3 mm, wall: 6.02 mm, material: STRUCT}
+    base_plate: {length: 220 mm, width: 220 mm, thickness: 16 mm, material: STRUCT,
+                 anchor_holes: 2, anchor_hole_diameter: 24 mm, anchor_spacing: 150 mm, anchor_bolt: M20}
+  lifting_lugs:
+    count: 2
+    orientation_start: 90 deg
+    elevation: 2850 mm                     # lug centre above the bottom tangent line
+    thickness: 20 mm
+    height: 160 mm
+    projection: 110 mm                     # from shell outside surface
+    hole_diameter: 40 mm
+    hole_edge_distance: 50 mm              # hole centre to outer edge
+    material: STRUCT
+    allowables: none
+  insulation: none
+
+fabrication:
+  joints:
+    shell_longitudinal:    {category: A, joint_type: 1, radiography: spot}
+    shell_circumferential: {category: B, joint_type: 1, radiography: spot}
+    head_to_shell:         {category: B, joint_type: 1, radiography: spot}
+  spot_rt_meets_uw11a5b: true
+  plate_thicknesses: {values: [6, 8, 10, 12, 14, 16, 18, 20, 22, 25], unit: mm}
+  plate_undertolerance: 0.3 mm
+  pipe_undertolerance: 12.5 %
+  cutting_allowance: 3 %
+  scrap_allowance: 5 %
+  nde: Spot RT of Category A and B butt welds (demo); nozzle weld NDE TBD
+  pwht: not stated
+  impact_testing: not stated
+  mdmt_assessment: none
+  pwht_assessment: none
+  general_tolerances: not specified
+
+loads:
+  wind: none
+  seismic: none
+  piping_loads: none
+  snow: {not_applicable: "vertical vessel, no horizontal surfaces holding snow (demo)"}
+  lifting: {impact_factor: 2.0, basis: "DEMO assumption — confirm with the lifting plan"}
+  transport: none
+  thermal: {not_applicable: "design temperature 80 degC, no restrained thermal expansion (demo)"}
+
+external_pressure_data:
+  shell: none
+  heads: none
+
+code_reference_verification:
+  verified: []      # entries: {id, edition, verified_by, verified_on, remark}

@@ -1,0 +1,7 @@
+calc_id,symbol,value,unit,rel_tolerance
+# Fill one row per value taken from a licensed PV Elite run of the same input (engine units: mm, MPa, mm2).
+# Remove these comment lines. Example rows (values are placeholders, not results):
+# SH-C1,t_circ,0.000,mm,0.005
+# HD-TOP,t_req,0.000,mm,0.005
+# NZ-N1-UG37,A,0.0,mm2,0.01
+# MAWP,MAWP,0.000,MPa,0.005

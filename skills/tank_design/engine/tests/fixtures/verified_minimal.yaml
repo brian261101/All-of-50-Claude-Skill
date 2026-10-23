@@ -1,0 +1,77 @@
+# TEST FIXTURE — exercises the release gate. The "verified" marks below are
+# test data, not a real verification of anything. Do not copy into a project.
+schema: pv-design/vessel@1
+project:
+  project_id: TEST-GATE
+  equipment_tag: T-1
+  description: Gate test fixture (plain shell, no openings)
+  design_code: ASME_VIII_1
+  code_edition: "2023"
+  units_system: SI
+  revision: "A"
+  data_status: USER_CONFIRMED
+design_basis: {locked: true, confirmed_by: TEST FIXTURE, confirmed_on: "2026-10-23"}
+process:
+  fluid: Air
+  fluid_phase: gas
+  lethal_service: false
+  cyclic_service: false
+  design_pressure: 1.0 MPa(g)
+  design_temperature: 80 degC
+  mdmt: -10 degC
+  external_pressure: none
+  corrosion_allowance: 1.5 mm
+  test_type: hydrostatic
+  test_basis: MAWP
+  test_temperature: 20 degC
+  test_position: vertical
+  test_fluid_density: 1000 kg/m3
+materials:
+  PLATE:
+    record:
+      id: FIXTURE-PLATE
+      spec: FIXTURE-SPEC
+      grade: "X"
+      product_form: plate
+      allowable_stress: {temperature_degC: [-30, 100], S_MPa: [137.9, 137.9]}
+      interpolation: linear between tabulated temperatures
+      min_yield_MPa: 260
+      density_kg_m3: 7850
+      source_document: test fixture values (not a code table)
+      verified_by: TEST FIXTURE
+      verified_on: "2026-10-23"
+      verification_status: USER_SUPPLIED_VERIFIED
+geometry:
+  orientation: vertical
+  diameter_basis: ID
+  diameter: 1200 mm
+  tangent_to_tangent: 3000 mm
+  bottom_tangent_elevation: 1000 mm
+  shell_courses:
+    - {id: C1, length: 2920 mm, material: PLATE, nominal_thickness: 8 mm, long_seam_orientation: 0 deg}
+  heads:
+    top: {type: ellipsoidal, aspect_ratio: 2.0, straight_flange: 40 mm, material: PLATE, construction: seamless,
+          nominal_thickness: 8 mm, min_thickness_after_forming: 7 mm}
+    bottom: {type: ellipsoidal, aspect_ratio: 2.0, straight_flange: 40 mm, material: PLATE, construction: seamless,
+             nominal_thickness: 8 mm, min_thickness_after_forming: 7 mm}
+  nozzles: []
+  supports: none
+fabrication:
+  joints:
+    shell_longitudinal: {category: A, joint_type: 1, radiography: spot}
+    shell_circumferential: {category: B, joint_type: 1, radiography: spot}
+    head_to_shell: {category: B, joint_type: 1, radiography: spot}
+  spot_rt_meets_uw11a5b: true
+  plate_thicknesses: {values: [6, 8, 10], unit: mm}
+  plate_undertolerance: 0.25 mm
+  pipe_undertolerance: 12.5 %
+loads:
+  wind: {not_applicable: "test fixture: indoor"}
+  seismic: {not_applicable: "test fixture"}
+  piping_loads: {not_applicable: "test fixture: no nozzles"}
+  snow: {not_applicable: "test fixture"}
+  thermal: {not_applicable: "test fixture"}
+  lifting: {not_applicable: "test fixture"}
+assessments:
+  MDMT: {result: exempt, basis: "test fixture", by: TEST FIXTURE, date: "2026-10-23", status: USER_SUPPLIED_VERIFIED}
+  PWHT: {result: pass, basis: "test fixture: not required", by: TEST FIXTURE, date: "2026-10-23", status: USER_SUPPLIED_VERIFIED}

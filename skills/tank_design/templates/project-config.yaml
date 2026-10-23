@@ -1,0 +1,23 @@
+# tank-vessel-design skill (/tank_design) configuration. Paths are relative to the
+# repository root (the folder that contains .claude/).
+library_root: pv_design                 # contains pv.py, src/, data/, tests/
+projects_root: pv_design/projects       # where project input files are kept
+output_root: pv_design/output           # one package folder per project id
+material_db: pv_design/data/materials/material_db.json
+reference_register: pv_design/data/code_references.json
+benchmarks: pv_design/data/benchmarks
+
+freecad:
+  mcp_server: freecad                   # uvx freecad-mcp (Claude desktop config)
+  gui_exe: C:/Program Files/FreeCAD 1.1/bin/freecad.exe
+  cmd_exe: C:/Program Files/FreeCAD 1.1/bin/freecadcmd.exe
+  route: mcp                            # mcp | headless
+
+report:
+  paper: A4
+drawings:
+  sheet: A1
+  hlr: polygonal                        # exact HLR stalls on B-spline heads (see mcp-freecad-guide.md)
+
+release:
+  max_automatic_stage: CALCULATION_VERIFIED   # never higher; review/approval are signed by people

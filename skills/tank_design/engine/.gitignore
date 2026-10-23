@@ -1,0 +1,6 @@
+# third-party sources cloned for the audit (never modified, never committed)
+/vendor/
+# FreeCAD backup files
+*.FCBak
+__pycache__/
+*.pyc

@@ -1,0 +1,491 @@
+{
+ "db_name": "pv-design material database",
+ "db_version": "0.1.0-representative",
+ "status_note": "All records REPRESENTATIVE_EXAMPLE. Replace with VERIFIED_OFFICIAL or USER_SUPPLIED_VERIFIED records before any design release.",
+ "records": [
+  {
+   "id": "SA-105_FORGING_REP",
+   "spec": "SA-105/SA-105M",
+   "grade": "-",
+   "product_form": "forging",
+   "allowable_stress": {
+    "temperature_degC": [
+     -28.9,
+     37.8,
+     93.3,
+     148.9,
+     204.4,
+     260.0,
+     315.6,
+     343.3,
+     371.1
+    ],
+    "S_MPa": [
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     135.1,
+     122.7,
+     118.6,
+     107.6
+    ]
+   },
+   "interpolation": "linear between tabulated temperatures",
+   "temperature_limits_degC": {
+    "min": -28.9,
+    "max": 371.1
+   },
+   "min_tensile_MPa": 485,
+   "min_yield_MPa": 250,
+   "density_kg_m3": 7850,
+   "source_document": "LaelaZorana/asme-viii-pressure-vessel data/materials_sec_ii_d_representative.csv @ 24c20bb0c707 (MIT), converted psi->MPa, degF->degC",
+   "table_reference": "ASME BPVC II-D Table 1A (representative only, NOT checked)",
+   "edition": "2023 basis as claimed by the source",
+   "verified_on": null,
+   "verified_by": null,
+   "verification_status": "REPRESENTATIVE_EXAMPLE",
+   "notes": [
+    "first point -28.9 degC repeats the 37.8 degC value (Table 1A column '-20 to 100 F')",
+    "tensile/yield/density are representative values, not from a licensed source"
+   ]
+  },
+  {
+   "id": "SA-106-B_PIPE_REP",
+   "spec": "SA-106/SA-106M",
+   "grade": "B",
+   "product_form": "seamless pipe",
+   "allowable_stress": {
+    "temperature_degC": [
+     -28.9,
+     37.8,
+     93.3,
+     148.9,
+     204.4,
+     260.0,
+     315.6,
+     343.3,
+     371.1
+    ],
+    "S_MPa": [
+     117.9,
+     117.9,
+     117.9,
+     117.9,
+     117.9,
+     117.9,
+     117.9,
+     117.9,
+     114.5
+    ]
+   },
+   "interpolation": "linear between tabulated temperatures",
+   "temperature_limits_degC": {
+    "min": -28.9,
+    "max": 371.1
+   },
+   "min_tensile_MPa": 415,
+   "min_yield_MPa": 240,
+   "density_kg_m3": 7850,
+   "source_document": "LaelaZorana/asme-viii-pressure-vessel data/materials_sec_ii_d_representative.csv @ 24c20bb0c707 (MIT), converted psi->MPa, degF->degC",
+   "table_reference": "ASME BPVC II-D Table 1A (representative only, NOT checked)",
+   "edition": "2023 basis as claimed by the source",
+   "verified_on": null,
+   "verified_by": null,
+   "verification_status": "REPRESENTATIVE_EXAMPLE",
+   "notes": [
+    "first point -28.9 degC repeats the 37.8 degC value (Table 1A column '-20 to 100 F')",
+    "tensile/yield/density are representative values, not from a licensed source"
+   ]
+  },
+  {
+   "id": "SA-182-F304_FORGING_REP",
+   "spec": "SA-182/SA-182M",
+   "grade": "F304",
+   "product_form": "forging",
+   "allowable_stress": {
+    "temperature_degC": [
+     -28.9,
+     37.8,
+     93.3,
+     148.9,
+     204.4,
+     260.0,
+     315.6,
+     343.3,
+     371.1
+    ],
+    "S_MPa": [
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     128.2,
+     120.7,
+     114.5,
+     112.4,
+     110.3
+    ]
+   },
+   "interpolation": "linear between tabulated temperatures",
+   "temperature_limits_degC": {
+    "min": -28.9,
+    "max": 371.1
+   },
+   "min_tensile_MPa": 515,
+   "min_yield_MPa": 205,
+   "density_kg_m3": 7900,
+   "source_document": "LaelaZorana/asme-viii-pressure-vessel data/materials_sec_ii_d_representative.csv @ 24c20bb0c707 (MIT), converted psi->MPa, degF->degC",
+   "table_reference": "ASME BPVC II-D Table 1A (representative only, NOT checked)",
+   "edition": "2023 basis as claimed by the source",
+   "verified_on": null,
+   "verified_by": null,
+   "verification_status": "REPRESENTATIVE_EXAMPLE",
+   "notes": [
+    "first point -28.9 degC repeats the 37.8 degC value (Table 1A column '-20 to 100 F')",
+    "tensile/yield/density are representative values, not from a licensed source"
+   ]
+  },
+  {
+   "id": "SA-240-304_PLATE_REP",
+   "spec": "SA-240/SA-240M",
+   "grade": "304",
+   "product_form": "plate",
+   "allowable_stress": {
+    "temperature_degC": [
+     -28.9,
+     37.8,
+     93.3,
+     148.9,
+     204.4,
+     260.0,
+     315.6,
+     343.3,
+     371.1,
+     426.7
+    ],
+    "S_MPa": [
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     128.2,
+     120.7,
+     114.5,
+     112.4,
+     110.3,
+     104.8
+    ]
+   },
+   "interpolation": "linear between tabulated temperatures",
+   "temperature_limits_degC": {
+    "min": -28.9,
+    "max": 426.7
+   },
+   "min_tensile_MPa": 515,
+   "min_yield_MPa": 205,
+   "density_kg_m3": 7900,
+   "source_document": "LaelaZorana/asme-viii-pressure-vessel data/materials_sec_ii_d_representative.csv @ 24c20bb0c707 (MIT), converted psi->MPa, degF->degC",
+   "table_reference": "ASME BPVC II-D Table 1A (representative only, NOT checked)",
+   "edition": "2023 basis as claimed by the source",
+   "verified_on": null,
+   "verified_by": null,
+   "verification_status": "REPRESENTATIVE_EXAMPLE",
+   "notes": [
+    "first point -28.9 degC repeats the 37.8 degC value (Table 1A column '-20 to 100 F')",
+    "tensile/yield/density are representative values, not from a licensed source"
+   ]
+  },
+  {
+   "id": "SA-240-316_PLATE_REP",
+   "spec": "SA-240/SA-240M",
+   "grade": "316",
+   "product_form": "plate",
+   "allowable_stress": {
+    "temperature_degC": [
+     -28.9,
+     37.8,
+     93.3,
+     148.9,
+     204.4,
+     260.0,
+     315.6,
+     343.3,
+     371.1,
+     426.7
+    ],
+    "S_MPa": [
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     133.1,
+     124.1,
+     117.2,
+     115.1,
+     112.4,
+     109.6
+    ]
+   },
+   "interpolation": "linear between tabulated temperatures",
+   "temperature_limits_degC": {
+    "min": -28.9,
+    "max": 426.7
+   },
+   "min_tensile_MPa": 515,
+   "min_yield_MPa": 205,
+   "density_kg_m3": 7950,
+   "source_document": "LaelaZorana/asme-viii-pressure-vessel data/materials_sec_ii_d_representative.csv @ 24c20bb0c707 (MIT), converted psi->MPa, degF->degC",
+   "table_reference": "ASME BPVC II-D Table 1A (representative only, NOT checked)",
+   "edition": "2023 basis as claimed by the source",
+   "verified_on": null,
+   "verified_by": null,
+   "verification_status": "REPRESENTATIVE_EXAMPLE",
+   "notes": [
+    "first point -28.9 degC repeats the 37.8 degC value (Table 1A column '-20 to 100 F')",
+    "tensile/yield/density are representative values, not from a licensed source"
+   ]
+  },
+  {
+   "id": "SA-285-C_PLATE_REP",
+   "spec": "SA-285/SA-285M",
+   "grade": "C",
+   "product_form": "plate",
+   "allowable_stress": {
+    "temperature_degC": [
+     -28.9,
+     37.8,
+     93.3,
+     148.9,
+     204.4,
+     260.0,
+     315.6,
+     343.3,
+     371.1
+    ],
+    "S_MPa": [
+     108.2,
+     108.2,
+     108.2,
+     108.2,
+     108.2,
+     108.2,
+     102.0,
+     99.3,
+     95.1
+    ]
+   },
+   "interpolation": "linear between tabulated temperatures",
+   "temperature_limits_degC": {
+    "min": -28.9,
+    "max": 371.1
+   },
+   "min_tensile_MPa": 380,
+   "min_yield_MPa": 205,
+   "density_kg_m3": 7850,
+   "source_document": "LaelaZorana/asme-viii-pressure-vessel data/materials_sec_ii_d_representative.csv @ 24c20bb0c707 (MIT), converted psi->MPa, degF->degC",
+   "table_reference": "ASME BPVC II-D Table 1A (representative only, NOT checked)",
+   "edition": "2023 basis as claimed by the source",
+   "verified_on": null,
+   "verified_by": null,
+   "verification_status": "REPRESENTATIVE_EXAMPLE",
+   "notes": [
+    "first point -28.9 degC repeats the 37.8 degC value (Table 1A column '-20 to 100 F')",
+    "tensile/yield/density are representative values, not from a licensed source"
+   ]
+  },
+  {
+   "id": "SA-350-LF2_FORGING_REP",
+   "spec": "SA-350/SA-350M",
+   "grade": "LF2",
+   "product_form": "forging",
+   "allowable_stress": {
+    "temperature_degC": [
+     -28.9,
+     37.8,
+     93.3,
+     148.9,
+     204.4,
+     260.0,
+     315.6,
+     343.3,
+     371.1
+    ],
+    "S_MPa": [
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     133.8,
+     129.6,
+     124.8
+    ]
+   },
+   "interpolation": "linear between tabulated temperatures",
+   "temperature_limits_degC": {
+    "min": -28.9,
+    "max": 371.1
+   },
+   "min_tensile_MPa": 485,
+   "min_yield_MPa": 250,
+   "density_kg_m3": 7850,
+   "source_document": "LaelaZorana/asme-viii-pressure-vessel data/materials_sec_ii_d_representative.csv @ 24c20bb0c707 (MIT), converted psi->MPa, degF->degC",
+   "table_reference": "ASME BPVC II-D Table 1A (representative only, NOT checked)",
+   "edition": "2023 basis as claimed by the source",
+   "verified_on": null,
+   "verified_by": null,
+   "verification_status": "REPRESENTATIVE_EXAMPLE",
+   "notes": [
+    "first point -28.9 degC repeats the 37.8 degC value (Table 1A column '-20 to 100 F')",
+    "tensile/yield/density are representative values, not from a licensed source"
+   ]
+  },
+  {
+   "id": "SA-515-70_PLATE_REP",
+   "spec": "SA-515/SA-515M",
+   "grade": "70",
+   "product_form": "plate",
+   "allowable_stress": {
+    "temperature_degC": [
+     -28.9,
+     37.8,
+     93.3,
+     148.9,
+     204.4,
+     260.0,
+     315.6,
+     343.3,
+     371.1
+    ],
+    "S_MPa": [
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     133.8,
+     129.6,
+     124.8
+    ]
+   },
+   "interpolation": "linear between tabulated temperatures",
+   "temperature_limits_degC": {
+    "min": -28.9,
+    "max": 371.1
+   },
+   "min_tensile_MPa": 485,
+   "min_yield_MPa": 260,
+   "density_kg_m3": 7850,
+   "source_document": "LaelaZorana/asme-viii-pressure-vessel data/materials_sec_ii_d_representative.csv @ 24c20bb0c707 (MIT), converted psi->MPa, degF->degC",
+   "table_reference": "ASME BPVC II-D Table 1A (representative only, NOT checked)",
+   "edition": "2023 basis as claimed by the source",
+   "verified_on": null,
+   "verified_by": null,
+   "verification_status": "REPRESENTATIVE_EXAMPLE",
+   "notes": [
+    "first point -28.9 degC repeats the 37.8 degC value (Table 1A column '-20 to 100 F')",
+    "tensile/yield/density are representative values, not from a licensed source"
+   ]
+  },
+  {
+   "id": "SA-516-70_PLATE_REP",
+   "spec": "SA-516/SA-516M",
+   "grade": "70",
+   "product_form": "plate",
+   "allowable_stress": {
+    "temperature_degC": [
+     -28.9,
+     37.8,
+     93.3,
+     148.9,
+     204.4,
+     260.0,
+     315.6,
+     343.3,
+     371.1
+    ],
+    "S_MPa": [
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     137.9,
+     133.8,
+     129.6,
+     124.8
+    ]
+   },
+   "interpolation": "linear between tabulated temperatures",
+   "temperature_limits_degC": {
+    "min": -28.9,
+    "max": 371.1
+   },
+   "min_tensile_MPa": 485,
+   "min_yield_MPa": 260,
+   "density_kg_m3": 7850,
+   "source_document": "LaelaZorana/asme-viii-pressure-vessel data/materials_sec_ii_d_representative.csv @ 24c20bb0c707 (MIT), converted psi->MPa, degF->degC",
+   "table_reference": "ASME BPVC II-D Table 1A (representative only, NOT checked)",
+   "edition": "2023 basis as claimed by the source",
+   "verified_on": null,
+   "verified_by": null,
+   "verification_status": "REPRESENTATIVE_EXAMPLE",
+   "notes": [
+    "first point -28.9 degC repeats the 37.8 degC value (Table 1A column '-20 to 100 F')",
+    "tensile/yield/density are representative values, not from a licensed source"
+   ]
+  },
+  {
+   "id": "SA-53-B_PIPE_REP",
+   "spec": "SA-53/SA-53M",
+   "grade": "B",
+   "product_form": "pipe",
+   "allowable_stress": {
+    "temperature_degC": [
+     -28.9,
+     37.8,
+     93.3,
+     148.9,
+     204.4,
+     260.0,
+     315.6,
+     343.3,
+     371.1
+    ],
+    "S_MPa": [
+     117.9,
+     117.9,
+     117.9,
+     117.9,
+     117.9,
+     117.9,
+     117.9,
+     117.9,
+     114.5
+    ]
+   },
+   "interpolation": "linear between tabulated temperatures",
+   "temperature_limits_degC": {
+    "min": -28.9,
+    "max": 371.1
+   },
+   "min_tensile_MPa": 415,
+   "min_yield_MPa": 240,
+   "density_kg_m3": 7850,
+   "source_document": "LaelaZorana/asme-viii-pressure-vessel data/materials_sec_ii_d_representative.csv @ 24c20bb0c707 (MIT), converted psi->MPa, degF->degC",
+   "table_reference": "ASME BPVC II-D Table 1A (representative only, NOT checked)",
+   "edition": "2023 basis as claimed by the source",
+   "verified_on": null,
+   "verified_by": null,
+   "verification_status": "REPRESENTATIVE_EXAMPLE",
+   "notes": [
+    "first point -28.9 degC repeats the 37.8 degC value (Table 1A column '-20 to 100 F')",
+    "tensile/yield/density are representative values, not from a licensed source"
+   ]
+  }
+ ]
+}

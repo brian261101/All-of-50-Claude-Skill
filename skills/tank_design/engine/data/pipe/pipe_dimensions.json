@@ -1,0 +1,26 @@
+{
+  "name": "Wrought steel pipe dimensions subset (ASME B36.10M basis)",
+  "version": "0.1.0",
+  "verification_status": "UNVERIFIED",
+  "source_document": "NPS 1/2-12 STD/40/80/160 rows from LaelaZorana/asme-viii-pressure-vessel data/pipe_schedules.csv (MIT), converted in -> mm; NPS 14-24 rows and XS rows added from commonly published B36.10M values. Check against the licensed ASME B36.10M before release.",
+  "reference": "ASME:B36.10M",
+  "units": "inch values as published; mm = inch x 25.4 computed by the software",
+  "rows": [
+    {"nps": "1/2", "od_in": 0.840, "walls_in": {"STD": 0.109, "40": 0.109, "XS": 0.147, "80": 0.147, "160": 0.188}},
+    {"nps": "3/4", "od_in": 1.050, "walls_in": {"STD": 0.113, "40": 0.113, "XS": 0.154, "80": 0.154, "160": 0.219}},
+    {"nps": "1", "od_in": 1.315, "walls_in": {"STD": 0.133, "40": 0.133, "XS": 0.179, "80": 0.179, "160": 0.250}},
+    {"nps": "1-1/2", "od_in": 1.900, "walls_in": {"STD": 0.145, "40": 0.145, "XS": 0.200, "80": 0.200, "160": 0.281}},
+    {"nps": "2", "od_in": 2.375, "walls_in": {"STD": 0.154, "40": 0.154, "XS": 0.218, "80": 0.218, "160": 0.344}},
+    {"nps": "3", "od_in": 3.500, "walls_in": {"STD": 0.216, "40": 0.216, "XS": 0.300, "80": 0.300, "160": 0.438}},
+    {"nps": "4", "od_in": 4.500, "walls_in": {"STD": 0.237, "40": 0.237, "XS": 0.337, "80": 0.337, "160": 0.531}},
+    {"nps": "6", "od_in": 6.625, "walls_in": {"STD": 0.280, "40": 0.280, "XS": 0.432, "80": 0.432, "160": 0.719}},
+    {"nps": "8", "od_in": 8.625, "walls_in": {"STD": 0.322, "40": 0.322, "XS": 0.500, "80": 0.500, "160": 0.906}},
+    {"nps": "10", "od_in": 10.750, "walls_in": {"STD": 0.365, "40": 0.365, "XS": 0.500, "80": 0.594}},
+    {"nps": "12", "od_in": 12.750, "walls_in": {"STD": 0.375, "40": 0.406, "XS": 0.500, "80": 0.688}},
+    {"nps": "14", "od_in": 14.000, "walls_in": {"STD": 0.375, "40": 0.438, "XS": 0.500, "80": 0.750}},
+    {"nps": "16", "od_in": 16.000, "walls_in": {"STD": 0.375, "40": 0.500, "XS": 0.500, "80": 0.844}},
+    {"nps": "18", "od_in": 18.000, "walls_in": {"STD": 0.375, "40": 0.562, "XS": 0.500, "80": 0.938}},
+    {"nps": "20", "od_in": 20.000, "walls_in": {"STD": 0.375, "40": 0.594, "XS": 0.500, "80": 1.031}},
+    {"nps": "24", "od_in": 24.000, "walls_in": {"STD": 0.375, "40": 0.688, "XS": 0.500, "80": 1.219}}
+  ]
+}
