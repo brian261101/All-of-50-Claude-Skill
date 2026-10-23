@@ -1,1 +1,0 @@
-"""Drawing generation scaffolding."""
