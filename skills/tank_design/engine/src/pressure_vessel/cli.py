@@ -8,6 +8,9 @@
     drawings DIR                      HLR projections of the STEP + GA / fabrication DXF/PDF
     bom DIR                           BOM.csv / BOM.xlsx / bom.json
     package DIR [--no-tests]          consistency checks, tests, review file, manifest, README
+    handoff DIR --zip FILE            pack steps 1-8 of a package into a handoff zip
+    resume ZIP --out DIR              unpack a handoff (e.g. from the web calculator), verify it by
+                                      recomputing, then continue with cad/drawings/bom/package
     all INPUT --out DIR [--headless]  every stage; CAD by freecadcmd with --headless,
                                       otherwise stops after printing the MCP snippets
 
@@ -119,6 +122,22 @@ def cmd_package(a):
     return 0 if c["ok"] and (tests is None or tests["passed"]) else 7
 
 
+def cmd_handoff(a):
+    from .handoff import make_handoff
+    h = make_handoff(a.dir, a.zip, tool="pv.py handoff")
+    _print({"zip": str(a.zip), "project_id": h["project_id"], "stage": h["stage"], "files": len(h["files"]),
+            "results_hash": h["results_hash"][:16]})
+    return 0
+
+
+def cmd_resume(a):
+    from .handoff import resume
+    c = resume(a.zip, a.out)
+    _print({"identical": c["identical"], "stage": c["stage"],
+            "checks": [f"{'OK ' if i['ok'] else 'NO '} {i['check']}" for i in c["items"]], "next": c["next"]})
+    return 0 if c["identical"] else 8
+
+
 def cmd_all(a):
     rc = cmd_calc(argparse.Namespace(input=a.input, out=a.out, pv_elite=a.pv_elite))
     if rc not in (0,):
@@ -156,6 +175,10 @@ def main(argv=None):
     p.set_defaults(f=cmd_cad)
     p = sub.add_parser("package"); p.add_argument("dir", type=Path); p.add_argument("--no-tests", action="store_true")   # noqa: E702
     p.set_defaults(f=cmd_package)
+    p = sub.add_parser("handoff"); p.add_argument("dir", type=Path); p.add_argument("--zip", required=True, type=Path)   # noqa: E702
+    p.set_defaults(f=cmd_handoff)
+    p = sub.add_parser("resume"); p.add_argument("zip", type=Path); p.add_argument("--out", required=True, type=Path)   # noqa: E702
+    p.set_defaults(f=cmd_resume)
     p = sub.add_parser("all"); p.add_argument("input", type=Path); p.add_argument("--out", required=True, type=Path)   # noqa: E702
     p.add_argument("--headless", action="store_true"); p.add_argument("--no-tests", action="store_true")   # noqa: E702
     p.add_argument("--pv-elite", type=Path); p.set_defaults(f=cmd_all)   # noqa: E702

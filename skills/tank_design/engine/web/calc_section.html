@@ -1,0 +1,12 @@
+    <section class="card out" id="sec-calc" aria-labelledby="hCalc" style="margin-bottom:16px">
+      <h2 id="hCalc">Tính toán: bước 3–8 của skill</h2>
+      <p class="hint" style="margin-top:6px">Chạy đúng engine <code>pv_design</code> của skill <code>tank-vessel-design</code> ngay trong trình duyệt (Python qua Pyodide; lần đầu tải khoảng 10 MB). Dữ liệu không rời khỏi máy bạn. Kết quả là hồ sơ <b>sơ bộ, không dùng để chế tạo</b>.</p>
+      <div class="bar" style="margin:10px 0 6px">
+        <button type="button" class="btn primary" id="bCalc">Tính toán</button>
+        <button type="button" class="btn" id="bPdf" disabled>Tải PDF tính toán</button>
+        <button type="button" class="btn" id="bZip" disabled>Tải gói chuyển tiếp cho Claude Code (.zip)</button>
+      </div>
+      <p id="calcLog" class="hint" role="status" aria-live="polite">Chưa tính. Điền phiếu rồi bấm “Tính toán”.</p>
+      <ol id="calcSteps" class="steps"></ol>
+      <div id="calcDetail"></div>
+    </section>

@@ -35,7 +35,21 @@ blocks (build, TechDraw page, TechDraw export); send them with the MCP tool
 `.claude/skills/tank_design/references/mcp-freecad-guide.md`.
 
 Commands: `validate`, `calc`, `report`, `cad [--headless]`, `cad-status`,
-`drawings`, `bom`, `package`, `all` (`python pv_design/pv.py -h`).
+`drawings`, `bom`, `package`, `handoff`, `resume`, `all` (`python pv_design/pv.py -h`).
+
+## Web calculator and handoff
+
+`web/` builds a static page (`python pv_design/web/build.py` → `web/dist/`, published at
+https://brian261101.github.io/tank-vessel-design-web/) that runs this engine in the browser with
+Pyodide: the design request form, validation, calculation, verification, release gate and a
+calculation PDF (pdfmake), plus a handoff zip (`HANDOFF.json`, `README_FOR_CLAUDE.md`,
+`00_INPUT/`, `01_CALCULATION/`). Nothing is reimplemented in JavaScript; the bundle is the files
+listed by `handoff.engine_files()` with their fingerprint.
+
+`pv.py resume <zip> --out <dir>` unpacks a handoff, checks the file hashes, recomputes locally and
+compares every result (floats within 1e-9 relative, because WebAssembly and the local C library can
+round the last digit differently), then the package continues with `report`, `bom`, `cad`,
+`drawings`, `package`. `pv.py handoff <dir> --zip <file>` makes the same zip from a local package.
 
 ## Requirements
 
@@ -69,9 +83,10 @@ pv.py                     CLI launcher
 src/pressure_vessel/      library (see docs/ARCHITECTURE.md)
 data/                     code reference register, material DB, pipe table, benchmarks
 examples/                 demo inputs, PV Elite CSV template
-tests/                    unittest suite (74 tests, incl. end-to-end with freecadcmd)
+tests/                    unittest suite (84 tests, incl. end-to-end with freecadcmd)
 tools/                    audit and data-build tools
 docs/                     SOURCE_AUDIT, ARCHITECTURE, ACCEPTANCE_TESTS, KNOWN_LIMITATIONS
+web/                      web calculator source (build.py, calc.js); dist/ is git-ignored
 output/<PROJECT>/         generated packages
 vendor/                   audited third-party repos (git-ignored, unmodified)
 ```

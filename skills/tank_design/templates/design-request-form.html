@@ -1,0 +1,1141 @@
+<title>Phiếu yêu cầu thiết kế bình & bồn</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: engineering datasheet — a sticky index rail with the "still missing" count, the sheet itself in numbered blocks, outputs at the end. */
+:root{
+  --paper:#f6f7f4; --sheet:#ffffff; --ink:#1b2422; --ink-2:#4a5653; --rule:#d3dad6; --rule-2:#e7ebe8;
+  --accent:#0d6b70; --accent-ink:#ffffff; --accent-soft:#e3f0ef; --req:#a54b07; --req-soft:#fbefe3;
+  --ok:#2f6b2f; --code:#eef1ef;
+  --f-head:"Barlow Semi Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"JetBrains Mono",Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#101615; --sheet:#161e1d; --ink:#e3ebe8; --ink-2:#9db0ab; --rule:#2c3936; --rule-2:#22302d;
+  --accent:#4fb3b5; --accent-ink:#06201f; --accent-soft:#16302f; --req:#f0a35e; --req-soft:#33251a;
+  --ok:#8fd08f; --code:#1d2725; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --paper:#101615; --sheet:#161e1d; --ink:#e3ebe8; --ink-2:#9db0ab; --rule:#2c3936; --rule-2:#22302d;
+  --accent:#4fb3b5; --accent-ink:#06201f; --accent-soft:#16302f; --req:#f0a35e; --req-soft:#33251a;
+  --ok:#8fd08f; --code:#1d2725; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45}
+.page{display:grid;grid-template-columns:250px minmax(0,1fr);gap:24px;max-width:1280px;margin:0 auto;
+  padding-block:20px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (max-width:860px){.page{grid-template-columns:minmax(0,1fr)}}
+h1,h2,h3{font-family:var(--f-head);text-wrap:balance;margin:0}
+h1{font-size:30px;font-weight:700;letter-spacing:.2px}
+h2{font-size:21px;font-weight:600}
+h3{font-size:16px;font-weight:600;color:var(--ink-2);text-transform:uppercase;letter-spacing:.6px}
+code,.mono{font-family:var(--f-mono);font-size:12.5px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);align-self:start;display:flex;flex-direction:column;gap:14px}
+@media (max-width:860px){.rail{position:static}}
+.card{background:var(--sheet);border:1px solid var(--rule);border-radius:6px}
+.rail .card{padding:14px}
+.count{font-family:var(--f-head);font-size:34px;font-weight:700;color:var(--req);line-height:1}
+.count.zero{color:var(--ok)}
+.rail ol{margin:8px 0 0;padding-left:20px;font-size:13.5px}
+.rail a{color:var(--ink);text-decoration:none}
+.rail a:hover,.rail a:focus-visible{color:var(--accent);text-decoration:underline}
+.miss{font-size:12.5px;max-height:220px;overflow:auto;margin:8px 0 0;padding-left:18px;color:var(--ink-2)}
+.miss li{margin:2px 0}
+.head{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;margin-bottom:6px}
+.lede{color:var(--ink-2);max-width:68ch;margin:6px 0 0}
+.kindsw{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.kindsw button{border:0;background:var(--sheet);color:var(--ink);padding:9px 14px;font:600 14px var(--f-body);cursor:pointer}
+.kindsw button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 18px}
+.btn{border:1px solid var(--rule);background:var(--sheet);color:var(--ink);border-radius:5px;padding:8px 12px;font:600 13.5px var(--f-body);cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.notice{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 5px 5px 0;font-size:13.5px;margin-bottom:16px}
+.notice.demo{background:var(--req-soft);border-color:var(--req)}
+section.blk{padding:18px;margin-bottom:16px;scroll-margin-top:20px}
+.blk > header{display:flex;gap:10px;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:12px}
+.blk > header .no{font-family:var(--f-mono);color:var(--accent);font-size:13px}
+.blk > header .st{margin-left:auto;font-size:12.5px;color:var(--ink-2)}
+.blk > header .st.bad{color:var(--req);font-weight:600}
+.blk .hint{color:var(--ink-2);font-size:13px;margin:-4px 0 10px}
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:minmax(150px,1.1fr) minmax(0,1.6fr) minmax(0,1.15fr);gap:8px 12px;align-items:start;padding:7px 0;border-bottom:1px dashed var(--rule-2)}
+.row:last-child{border-bottom:0}
+@media (max-width:640px){.row{grid-template-columns:minmax(0,1fr)}}
+.lbl{font-size:14px}
+.lbl .k{display:block;font-family:var(--f-mono);font-size:11px;color:var(--ink-2)}
+.lbl .r{color:var(--req);font-weight:700;margin-left:2px}
+.lbl .h{display:block;font-size:12px;color:var(--ink-2)}
+.inp{display:flex;gap:6px;min-width:0}
+.inp > *{min-width:0}
+input,select,textarea{font:14px var(--f-body);color:var(--ink);background:var(--sheet);border:1px solid var(--rule);border-radius:4px;padding:6px 8px;width:100%}
+textarea{min-height:60px;resize:vertical}
+select.unit{width:auto;flex:0 0 auto;font-family:var(--f-mono);font-size:12.5px}
+.row.missing input,.row.missing select{border-color:var(--req);background:var(--req-soft)}
+.src{display:flex;gap:6px;min-width:0}
+.src select{width:auto;flex:0 0 auto;font-size:12px}
+.src input{font-size:12.5px}
+.items{display:flex;flex-direction:column;gap:12px}
+.item{border:1px solid var(--rule);border-radius:5px;padding:10px 12px;background:var(--paper)}
+.item > .ih{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:4px}
+.item > .ih b{font-family:var(--f-head);font-size:16px}
+.item > .ih .src{margin-left:auto}
+.sub{font-family:var(--f-head);font-weight:600;font-size:13.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--accent);margin:10px 0 2px}
+.out{padding:18px}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin:8px 0}
+.tabs button{border:1px solid var(--rule);background:var(--sheet);color:var(--ink);padding:6px 10px;border-radius:4px;cursor:pointer;font:600 13px var(--f-body)}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+pre.code{background:var(--code);border:1px solid var(--rule);border-radius:5px;padding:12px;overflow:auto;max-height:520px;font-family:var(--f-mono);font-size:12px;line-height:1.5;white-space:pre}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--sheet);padding:9px 14px;border-radius:5px;font-size:13.5px;max-width:calc(100% - 32px)}
+.legend{font-size:12.5px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px}
+.legend b{font-family:var(--f-mono);font-weight:600;color:var(--ink)}
+@media (prefers-reduced-motion:no-preference){.btn,.kindsw button{transition:background .15s,border-color .15s}}
+</style>
+
+<div class="page">
+  <aside class="rail" aria-label="Mục lục">
+    <div class="card">
+      <h3>Còn thiếu</h3>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px"><span id="missCount" class="count">0</span><span>mục bắt buộc</span></div>
+      <ul id="missList" class="miss"></ul>
+    </div>
+    <div class="card">
+      <h3>Mục lục</h3>
+      <ol id="toc"></ol>
+    </div>
+  </aside>
+
+  <main>
+    <div class="head">
+      <div>
+        <h1>Phiếu yêu cầu thiết kế bình &amp; bồn</h1>
+        <p class="lede">Điền dữ liệu đầu vào cho skill <code>tank-vessel-design</code> (<code>/tank_design</code>). Mỗi giá trị đi kèm đơn vị và nguồn. Ô bỏ trống được ghi là <code>none</code>: skill không tự đặt giá trị, phép kiểm tra tương ứng sẽ là <code>NOT_EVALUATED</code> và được hỏi lại.</p>
+      </div>
+      <div class="kindsw" role="group" aria-label="Loại thiết bị">
+        <button type="button" id="kVessel" aria-pressed="true">Bình áp lực · ASME VIII-1</button>
+        <button type="button" id="kTank" aria-pressed="false">Bồn chứa · API 650</button>
+      </div>
+    </div>
+
+    <div id="demoNote" class="notice demo">Đang hiển thị <b>dữ liệu ví dụ</b> (bình V-101 / bồn T-201, số liệu tự đặt, không dùng cho thiết kế thật). Bấm “Bắt đầu phiếu trống” để nhập dự án của bạn.</div>
+    <div class="bar">
+      <button type="button" class="btn" id="bBlank">Bắt đầu phiếu trống</button>
+      <button type="button" class="btn" id="bDemo">Nạp lại ví dụ</button>
+    </div>
+
+    <div id="form"></div>
+
+    <section class="card out" id="sec-out" aria-labelledby="hOut">
+      <h2 id="hOut">Kết quả: file đầu vào cho skill</h2>
+      <p class="hint" style="margin-top:6px">Lưu cả hai file vào <code>pv_design/projects/&lt;mã dự án&gt;/</code>, rồi chạy <code>python pv_design/pv.py validate &lt;file .json&gt;</code> hoặc gọi <code>/tank_design</code> và đưa đường dẫn file. Engine đọc thẳng file JSON; bản YAML có ghi chú nguồn để đọc.</p>
+      <div class="bar" style="margin:10px 0 4px">
+        <button type="button" class="btn primary" id="bSaveJson">Lưu file đầu vào (.json)</button>
+        <button type="button" class="btn" id="bSaveReg">Lưu sổ nguồn (.md)</button>
+        <button type="button" class="btn" id="bCopy">Sao chép tab đang xem</button>
+        <button type="button" class="btn" id="bSend" hidden>Gửi cho Claude</button>
+      </div>
+      <p id="sendNote" class="hint" hidden></p>
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" data-tab="yaml" aria-selected="true">YAML (có ghi chú nguồn)</button>
+        <button type="button" role="tab" data-tab="json" aria-selected="false">JSON (cho engine)</button>
+        <button type="button" role="tab" data-tab="reg" aria-selected="false">Sổ nguồn (source_register.md)</button>
+      </div>
+      <pre class="code" id="outBox" tabindex="0"></pre>
+    </section>
+  </main>
+</div>
+<div id="toast" class="toast" hidden></div>
+
+<script>
+/*CORE-START*/
+const UNITS = {len:['mm','m','in'], pres:['MPa(g)','barg','kPa(g)','psig'], dp:['MPa','kPa','bar','psi'],
+  temp:['degC','degF'], vol:['m3','L'], dens:['kg/m3'], str:['MPa','ksi','psi'], force:['kN','N'],
+  mom:['kN.m','N.m'], pct:['%']};
+const SRC = ['DWG','DATASHEET','SPEC','USER','INFERRED','USER_ASSUMPTION','NOT_SUPPLIED'];
+const DATA_ST = ['USER_SUPPLIED_UNVERIFIED','USER_SUPPLIED_VERIFIED','VERIFIED_OFFICIAL','REPRESENTATIVE_EXAMPLE','UNVERIFIED'];
+const DB_MAT = ['SA-516-70_PLATE_REP','SA-515-70_PLATE_REP','SA-285-C_PLATE_REP','SA-240-304_PLATE_REP','SA-240-316_PLATE_REP',
+  'SA-106-B_PIPE_REP','SA-53-B_PIPE_REP','SA-105_FORGING_REP','SA-350-LF2_FORGING_REP','SA-182-F304_FORGING_REP'];
+const NPS = ['1/2','3/4','1','1-1/2','2','3','4','6','8','10','12','14','16','18','20','24'];
+const SCH = ['STD','40','XS','80','160'];
+const BOOL = [['','— chưa rõ'],['true','có'],['false','không']];
+
+const F = (k, l, t, o = {}) => Object.assign({k, l, t}, o);   // key, label, type, options
+const has = v => v !== undefined && v !== null && String(v).trim() !== '';
+const numOk = v => has(v) && isFinite(Number(String(v).replace(',', '.')));
+const num = v => Number(String(v).replace(',', '.'));
+
+/* ---------- field definitions ---------- */
+const matOpts = S => [''].concat((S.lists.materials || []).map(m => (m.vals.key || {}).v).filter(has));
+const isV = S => S.kind === 'vessel';
+const fv = (S, k) => (S.f[k] || {}).v;
+
+const PROJECT = [
+  F('project.project_id','Mã dự án','text',{req:true,help:'vd. PV-2026-014'}),
+  F('project.equipment_tag','Tag thiết bị','text',{req:true,help:'vd. V-101'}),
+  F('project.description','Mô tả thiết bị','text',{req:true}),
+  F('project.customer','Khách hàng / dự án','text'),
+  F('project.code_edition','Phiên bản tiêu chuẩn','text',{req:true,help:'năm phát hành và addendum, vd. 2023'}),
+  F('project.addenda','Addenda','text'),
+  F('project.revision','Revision','text',{req:true,help:'vd. 00'}),
+  F('project.jurisdiction','Nơi lắp đặt / quy định kiểm định','text',{help:'quốc gia, cơ quan kiểm định'}),
+  F('project.data_status','Trạng thái dữ liệu','sel',{req:true,opts:[['DEMO_SAMPLE','DEMO_SAMPLE — chưa xác nhận'],['USER_CONFIRMED','USER_CONFIRMED — đã xác nhận']]}),
+  F('project.prepared_by','Người lập','text'),
+];
+const BASIS = [
+  F('design_basis.locked','Khóa design basis','bool',{help:'chỉ chọn “có” khi mọi đầu vào đã được xác nhận (cần USER_CONFIRMED)'}),
+  F('design_basis.confirmed_by','Người xác nhận','text',{req:S=>fv(S,'design_basis.locked')==='true'}),
+  F('design_basis.confirmed_on','Ngày xác nhận','date',{req:S=>fv(S,'design_basis.locked')==='true'}),
+];
+const V_PROCESS = [
+  F('process.fluid','Lưu chất','text',{req:true}),
+  F('process.fluid_phase','Pha','sel',{req:true,opts:[['',''],['gas','khí'],['liquid','lỏng'],['two_phase','hai pha']]}),
+  F('process.lethal_service','Môi chất gây chết người (lethal)','bool'),
+  F('process.cyclic_service','Làm việc theo chu kỳ (mỏi)','bool'),
+  F('process.operating_pressure','Áp suất vận hành','q',{u:'pres'}),
+  F('process.design_pressure','Áp suất thiết kế (trong)','q',{u:'pres',req:true,help:'áp kế (gauge)'}),
+  F('process.operating_temperature','Nhiệt độ vận hành','q',{u:'temp'}),
+  F('process.design_temperature','Nhiệt độ thiết kế','q',{u:'temp',req:true}),
+  F('process.mdmt','MDMT','q',{u:'temp',req:true,help:'nhiệt độ kim loại thiết kế nhỏ nhất'}),
+  F('process.external_pressure','Áp suất ngoài / chân không','q',{u:'dp',help:'bỏ trống nếu không có trường hợp chân không'}),
+  F('process.external_design_temperature','Nhiệt độ cho trường hợp áp ngoài','q',{u:'temp',req:S=>has(fv(S,'process.external_pressure'))}),
+  F('process.required_volume','Thể tích yêu cầu','q',{u:'vol'}),
+  F('process.liquid_level','Mức lỏng lớn nhất (từ BTL)','q',{u:'len',req:S=>['liquid','two_phase'].includes(fv(S,'process.fluid_phase'))}),
+  F('process.liquid_density','Khối lượng riêng chất lỏng','q',{u:'dens',req:S=>['liquid','two_phase'].includes(fv(S,'process.fluid_phase'))}),
+  F('process.corrosion_allowance','Dung sai ăn mòn (CA)','q',{u:'len',req:true}),
+  F('process.test_type','Loại thử áp','sel',{req:true,opts:[['',''],['hydrostatic','thủy lực'],['pneumatic','khí nén']]}),
+  F('process.test_basis','Cơ sở áp suất thử','sel',{req:true,opts:[['',''],['MAWP','MAWP (UG-99(b))'],['design_pressure','áp suất thiết kế']]}),
+  F('process.test_temperature','Nhiệt độ thử','q',{u:'temp',req:true}),
+  F('process.test_position','Tư thế khi thử','sel',{opts:[['vertical','đứng'],['horizontal','nằm']]}),
+  F('process.test_fluid_density','Khối lượng riêng nước thử','q',{u:'dens',req:S=>fv(S,'process.test_type')==='hydrostatic'}),
+];
+const V_GEOM = [
+  F('geometry.orientation','Kiểu đặt','sel',{req:true,opts:[['vertical','đứng (chân đỡ)']],help:'bình nằm trên yên ngựa: chưa hỗ trợ trong v0.1'}),
+  F('geometry.diameter','Đường kính trong (ID)','q',{u:'len',req:true}),
+  F('geometry.tangent_to_tangent','Chiều dài T/T','q',{u:'len',req:true,help:'= tổng các đoạn thân + 2 gờ thẳng của đáy'}),
+  F('geometry.bottom_tangent_elevation','Cao độ đường tiếp tuyến đáy dưới (BTL)','q',{u:'len',req:true,help:'tính từ mặt dưới bản đế'}),
+];
+const HEAD = [
+  F('type','Loại đáy','sel',{req:true,opts:[['',''],['ellipsoidal','elip'],['torispherical','chỏm cầu (F&D)'],['hemispherical','bán cầu']]}),
+  F('aspect_ratio','Tỉ số D/2h','num',{req:(S,it)=>iv(it,'type')==='ellipsoidal',show:it=>iv(it,'type')==='ellipsoidal',help:'2.0 cho elip 2:1'}),
+  F('crown_radius','Bán kính chỏm L (trong)','q',{u:'len',req:(S,it)=>iv(it,'type')==='torispherical',show:it=>iv(it,'type')==='torispherical'}),
+  F('knuckle_radius','Bán kính góc lượn r (trong)','q',{u:'len',req:(S,it)=>iv(it,'type')==='torispherical',show:it=>iv(it,'type')==='torispherical'}),
+  F('straight_flange','Gờ thẳng (SF)','q',{u:'len',req:true}),
+  F('material','Vật liệu','mat',{req:true}),
+  F('construction','Chế tạo','sel',{req:true,opts:[['',''],['seamless','liền khối (không mối hàn)'],['welded','có mối hàn trong đáy']]}),
+  F('joint_efficiency','Hệ số mối hàn E của đáy','num',{req:(S,it)=>iv(it,'construction')==='welded',show:it=>iv(it,'construction')==='welded'}),
+  F('mode','Chiều dày','sel',{opts:[['given','tôi cho chiều dày'],['auto','skill tự chọn']]}),
+  F('nominal_thickness','Chiều dày danh nghĩa tấm','q',{u:'len',req:(S,it)=>iv(it,'mode')!=='auto',show:it=>iv(it,'mode')!=='auto'}),
+  F('min_thickness_after_forming','Chiều dày nhỏ nhất sau dập','q',{u:'len',req:(S,it)=>iv(it,'mode')!=='auto'&&!has(iv(it,'forming_allowance')),help:'nhà sản xuất đáy cam kết; hoặc nhập lượng mỏng đi khi dập'}),
+  F('forming_allowance','Lượng mỏng đi khi dập','q',{u:'len',req:(S,it)=>iv(it,'mode')==='auto'}),
+];
+const COURSE = [
+  F('id','Tên đoạn','text',{req:true}),
+  F('length','Chiều dài đoạn','q',{u:'len',req:true}),
+  F('material','Vật liệu','mat',{req:true}),
+  F('mode','Chiều dày','sel',{opts:[['auto','skill tự chọn'],['given','tôi cho chiều dày']]}),
+  F('nominal_thickness','Chiều dày danh nghĩa','q',{u:'len',req:(S,it)=>iv(it,'mode')==='given',show:it=>iv(it,'mode')==='given'}),
+  F('long_seam_orientation','Góc mối hàn dọc','ang',{help:'độ, theo chiều kim đồng hồ từ 0° (Bắc) nhìn từ trên'}),
+];
+const NOZZLE = [
+  F('tag','Ký hiệu','text',{req:true}),
+  F('service','Chức năng','text'),
+  F('location','Vị trí','sel',{req:true,opts:[['shell','thân'],['top_head','đáy trên (tâm)'],['bottom_head','đáy dưới (tâm)']]}),
+  F('elevation','Cao độ tâm (từ BTL)','q',{u:'len',req:(S,it)=>iv(it,'location')==='shell',show:it=>iv(it,'location')==='shell'}),
+  F('orientation','Góc định hướng','ang',{req:(S,it)=>iv(it,'location')==='shell',show:it=>iv(it,'location')==='shell'}),
+  F('projection','Độ vươn (mặt ngoài bình → mặt bích)','q',{u:'len',req:true}),
+  F('attachment','Kiểu lắp','sel',{opts:[['set_in','xuyên qua thân (set-in)'],['set_on','đặt lên thân (set-on)']]}),
+  F('access_opening','Lỗ người / lỗ kiểm tra','bool'),
+  F('inward_projection','Độ thò vào trong','q',{u:'len'}),
+  F('neck_type','Cổ ống','sel',{opts:[['pipe','ống tiêu chuẩn'],['plate','tấm cuốn']],group:'Cổ ống'}),
+  F('nps','NPS','sel',{opts:NPS.map(x=>[x,x]),show:it=>iv(it,'neck_type')!=='plate',req:(S,it)=>iv(it,'neck_type')!=='plate'}),
+  F('schedule','Schedule','sel',{opts:SCH.map(x=>[x,x]),show:it=>iv(it,'neck_type')!=='plate',req:(S,it)=>iv(it,'neck_type')!=='plate'}),
+  F('neck_od','Đường kính ngoài cổ','q',{u:'len',show:it=>iv(it,'neck_type')==='plate',req:(S,it)=>iv(it,'neck_type')==='plate'}),
+  F('neck_thickness','Chiều dày cổ','q',{u:'len',show:it=>iv(it,'neck_type')==='plate',req:(S,it)=>iv(it,'neck_type')==='plate'}),
+  F('equivalent_nps','NPS tương đương (Table UG-45)','sel',{opts:[['','—']].concat(NPS.map(x=>[x,x])),show:it=>iv(it,'neck_type')==='plate'}),
+  F('seam_E','Hệ số mối hàn dọc của cổ','num',{show:it=>iv(it,'neck_type')==='plate',req:(S,it)=>iv(it,'neck_type')==='plate'}),
+  F('neck_material','Vật liệu cổ','mat',{req:true}),
+  F('fl_on','Có mặt bích','bool',{group:'Mặt bích'}),
+  F('fl_standard','Tiêu chuẩn','text',{show:it=>iv(it,'fl_on')==='true',help:'vd. ASME B16.5'}),
+  F('fl_class','Class','text',{show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_type','Kiểu','sel',{opts:[['WN','WN'],['SO','SO'],['LJ','LJ'],['BL','BL']],show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_facing','Mặt làm kín','sel',{opts:[['RF','RF'],['FF','FF'],['RTJ','RTJ']],show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_material','Vật liệu mặt bích','mat',{show:it=>iv(it,'fl_on')==='true',req:(S,it)=>iv(it,'fl_on')==='true'}),
+  F('fl_rating','Định mức P–T ở nhiệt độ thiết kế','q',{u:'pres',show:it=>iv(it,'fl_on')==='true',help:'đọc từ bảng B16.5 bản quyền; bỏ trống = NOT_EVALUATED'}),
+  F('fl_rating_source','Nguồn định mức','text',{show:it=>iv(it,'fl_on')==='true'&&has(iv(it,'fl_rating'))}),
+  F('fl_rating_status','Trạng thái định mức','sel',{opts:DATA_ST.map(x=>[x,x]),show:it=>iv(it,'fl_on')==='true'&&has(iv(it,'fl_rating'))}),
+  F('fl_od','Đường kính ngoài bích','q',{u:'len',show:it=>iv(it,'fl_on')==='true',help:'kích thước dùng cho mô hình 3D và bản vẽ'}),
+  F('fl_thk','Chiều dày bích','q',{u:'len',show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_hub','Đường kính cổ bích (hub)','q',{u:'len',show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_hublen','Chiều dài qua hub (Y)','q',{u:'len',show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_bc','Đường kính vòng bu lông','q',{u:'len',show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_holes','Số lỗ bu lông','int',{show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_hole_d','Đường kính lỗ bu lông','q',{u:'len',show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_bolt','Cỡ bu lông','text',{show:it=>iv(it,'fl_on')==='true',help:'vd. 5/8 in'}),
+  F('fl_rf_od','Đường kính mặt RF','q',{u:'len',show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_rf_h','Chiều cao mặt RF','q',{u:'len',show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_dims_source','Nguồn kích thước bích','text',{show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_blind','Có bích mù (nắp)','bool',{show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_bolting_supply','Cấp kèm gioăng và bu lông','bool',{show:it=>iv(it,'fl_on')==='true'}),
+  F('fl_gasket','Gioăng','text',{show:it=>iv(it,'fl_on')==='true'&&iv(it,'fl_bolting_supply')==='true'}),
+  F('fl_bolting','Bu lông','text',{show:it=>iv(it,'fl_on')==='true'&&iv(it,'fl_bolting_supply')==='true'}),
+  F('pad_on','Có tấm gia cường','bool',{group:'Tấm gia cường & mối hàn'}),
+  F('pad_t','Chiều dày tấm','q',{u:'len',show:it=>iv(it,'pad_on')==='true',req:(S,it)=>iv(it,'pad_on')==='true'}),
+  F('pad_od','Đường kính ngoài tấm','q',{u:'len',show:it=>iv(it,'pad_on')==='true',req:(S,it)=>iv(it,'pad_on')==='true'}),
+  F('pad_material','Vật liệu tấm','mat',{show:it=>iv(it,'pad_on')==='true',req:(S,it)=>iv(it,'pad_on')==='true'}),
+  F('w_noz','Cạnh mối hàn cổ (ngoài)','q',{u:'len',help:'bỏ trống: diện tích mối hàn tính bằng 0, UG-41 NOT_EVALUATED'}),
+  F('w_pad','Cạnh mối hàn mép tấm','q',{u:'len'}),
+  F('w_in','Cạnh mối hàn phía trong','q',{u:'len'}),
+];
+const MATERIAL = [
+  F('key','Mã gọi trong phiếu','text',{req:true,help:'vd. PLATE, PIPE — dùng ở các ô “Vật liệu”'}),
+  F('mode','Nguồn dữ liệu','sel',{opts:[['db','CSDL đi kèm (ví dụ, chưa xác minh)'],['record','tôi cung cấp ứng suất cho phép'],['non_pressure','chi tiết không chịu áp']]}),
+  F('db_id','Bản ghi CSDL','sel',{opts:DB_MAT.map(x=>[x,x]),show:it=>iv(it,'mode')==='db',req:(S,it)=>iv(it,'mode')==='db'}),
+  F('spec','Tiêu chuẩn vật liệu','text',{show:it=>iv(it,'mode')!=='db',req:(S,it)=>iv(it,'mode')!=='db',help:'vd. SA-516/SA-516M'}),
+  F('grade','Mác','text',{show:it=>iv(it,'mode')==='record',req:(S,it)=>iv(it,'mode')==='record'}),
+  F('product_form','Dạng sản phẩm','text',{show:it=>iv(it,'mode')==='record',help:'plate, seamless pipe, forging…'}),
+  F('s_temps','Nhiệt độ bảng ứng suất (°C)','text',{show:it=>iv(it,'mode')==='record',req:(S,it)=>iv(it,'mode')==='record',help:'tăng dần, cách nhau bằng dấu phẩy: -29, 40, 100, 150'}),
+  F('s_values','Ứng suất cho phép S (MPa)','text',{show:it=>iv(it,'mode')==='record',req:(S,it)=>iv(it,'mode')==='record',help:'cùng số giá trị với hàng nhiệt độ'}),
+  F('interp','Cho phép nội suy tuyến tính','bool',{show:it=>iv(it,'mode')==='record'}),
+  F('fu','Giới hạn bền nhỏ nhất','q',{u:'str',show:it=>iv(it,'mode')==='record'}),
+  F('fy','Giới hạn chảy nhỏ nhất','q',{u:'str',show:it=>iv(it,'mode')!=='db'}),
+  F('density','Khối lượng riêng','q',{u:'dens',show:it=>iv(it,'mode')!=='db',req:(S,it)=>iv(it,'mode')==='non_pressure'}),
+  F('source_document','Tài liệu nguồn','text',{show:it=>iv(it,'mode')==='record',req:(S,it)=>iv(it,'mode')==='record'&&iv(it,'status')!=='USER_SUPPLIED_UNVERIFIED',help:'vd. ASME II-D 2023 Table 1A, trang/dòng'}),
+  F('status','Trạng thái xác minh','sel',{opts:DATA_ST.map(x=>[x,x]),show:it=>iv(it,'mode')!=='db'}),
+  F('verified_by','Người xác minh','text',{show:it=>iv(it,'mode')==='record',req:(S,it)=>iv(it,'mode')==='record'&&['USER_SUPPLIED_VERIFIED','VERIFIED_OFFICIAL'].includes(iv(it,'status'))}),
+  F('verified_on','Ngày xác minh','date',{show:it=>iv(it,'mode')==='record',req:(S,it)=>iv(it,'mode')==='record'&&['USER_SUPPLIED_VERIFIED','VERIFIED_OFFICIAL'].includes(iv(it,'status'))}),
+];
+const DOCS = [
+  F('ref','Ký hiệu','text',{req:true,help:'D1, D2, U1…'}),
+  F('document','Tài liệu','text',{req:true,help:'bản vẽ, datasheet, spec…'}),
+  F('number','Số / revision / ngày','text'),
+  F('doc_status','Trạng thái ghi trên tài liệu','text',{help:'vd. for quotation only'}),
+];
+const SUPPORTS = [
+  F('supports.on','Chân đỡ kiểu chân ống','bool',{help:'skirt, yên ngựa: chưa hỗ trợ trong v0.1'}),
+  F('supports.count','Số chân','int',{req:S=>fv(S,'supports.on')==='true'}),
+  F('supports.orientation_start','Góc chân đầu tiên','ang',{req:S=>fv(S,'supports.on')==='true'}),
+  F('supports.top_elevation','Đỉnh chân (từ BTL)','q',{u:'len',req:S=>fv(S,'supports.on')==='true'}),
+  F('supports.section','Quy cách chân','text',{help:'vd. Pipe 114.3x6.02 (DN100 SCH40)'}),
+  F('supports.od','Đường kính ngoài chân','q',{u:'len',req:S=>fv(S,'supports.on')==='true'}),
+  F('supports.wall','Chiều dày ống chân','q',{u:'len',req:S=>fv(S,'supports.on')==='true'}),
+  F('supports.material','Vật liệu chân','mat',{req:S=>fv(S,'supports.on')==='true'}),
+  F('supports.bp_length','Bản đế: dài','q',{u:'len',req:S=>fv(S,'supports.on')==='true'}),
+  F('supports.bp_width','Bản đế: rộng','q',{u:'len',req:S=>fv(S,'supports.on')==='true'}),
+  F('supports.bp_thk','Bản đế: dày','q',{u:'len',req:S=>fv(S,'supports.on')==='true'}),
+  F('supports.bp_material','Bản đế: vật liệu','mat',{req:S=>fv(S,'supports.on')==='true'}),
+  F('supports.bp_holes','Số lỗ bu lông neo / chân','int'),
+  F('supports.bp_hole_d','Đường kính lỗ neo','q',{u:'len',req:S=>Number(fv(S,'supports.bp_holes'))>0}),
+  F('supports.bp_spacing','Khoảng cách lỗ neo','q',{u:'len',req:S=>Number(fv(S,'supports.bp_holes'))>1}),
+  F('supports.anchor_bolt','Bu lông neo','text',{help:'vd. M20'}),
+];
+const LUGS = [
+  F('lugs.on','Có tai cẩu','bool'),
+  F('lugs.count','Số tai','int',{req:S=>fv(S,'lugs.on')==='true'}),
+  F('lugs.orientation_start','Góc tai đầu tiên','ang',{req:S=>fv(S,'lugs.on')==='true'}),
+  F('lugs.elevation','Cao độ tâm tai (từ BTL)','q',{u:'len',req:S=>fv(S,'lugs.on')==='true'}),
+  F('lugs.thickness','Chiều dày tai','q',{u:'len',req:S=>fv(S,'lugs.on')==='true'}),
+  F('lugs.height','Chiều cao tai','q',{u:'len',req:S=>fv(S,'lugs.on')==='true'}),
+  F('lugs.projection','Độ vươn từ mặt ngoài thân','q',{u:'len',req:S=>fv(S,'lugs.on')==='true'}),
+  F('lugs.hole_diameter','Đường kính lỗ','q',{u:'len',req:S=>fv(S,'lugs.on')==='true'}),
+  F('lugs.hole_edge_distance','Tâm lỗ đến mép ngoài','q',{u:'len',req:S=>fv(S,'lugs.on')==='true'}),
+  F('lugs.material','Vật liệu tai','mat',{req:S=>fv(S,'lugs.on')==='true'}),
+  F('lugs.allow_t','Ứng suất cho phép kéo','q',{u:'str',help:'theo tiêu chuẩn nâng hạ của dự án (vd. ASME BTH-1); bỏ trống = NOT_EVALUATED'}),
+  F('lugs.allow_s','Ứng suất cho phép cắt','q',{u:'str'}),
+  F('lugs.allow_b','Ứng suất cho phép dập','q',{u:'str'}),
+];
+const JT = [['','—'],['1','1 · hàn giáp mối hai phía'],['2','2 · hàn một phía có tấm lót'],['3','3 · hàn một phía không lót'],['4','4'],['5','5'],['6','6']];
+const RT = [['','—'],['full','chụp toàn bộ (full)'],['spot','chụp xác suất (spot)'],['none','không chụp']];
+const FAB = [
+  F('fab.jl_type','Mối hàn dọc thân (loại A): kiểu','sel',{req:true,opts:JT}),
+  F('fab.jl_rt','Mối hàn dọc thân: chụp RT','sel',{req:true,opts:RT}),
+  F('fab.jc_type','Mối hàn vòng thân (loại B): kiểu','sel',{req:true,opts:JT}),
+  F('fab.jc_rt','Mối hàn vòng thân: chụp RT','sel',{req:true,opts:RT}),
+  F('fab.jh_type','Mối hàn đáy–thân (loại B): kiểu','sel',{req:true,opts:JT}),
+  F('fab.jh_rt','Mối hàn đáy–thân: chụp RT','sel',{req:true,opts:RT}),
+  F('fab.spot_rt','Đạt yêu cầu spot RT của UW-11(a)(5)(b)','bool',{help:'quyết định E = 1.0 hay 0.85 cho đáy liền khối'}),
+  F('fab.plates','Các chiều dày tấm có sẵn (mm)','text',{help:'vd. 6, 8, 10, 12, 14, 16, 20, 25 — cần khi để skill tự chọn chiều dày'}),
+  F('fab.plate_ut','Dung sai âm của tấm','q',{u:'len'}),
+  F('fab.pipe_ut','Dung sai âm của ống','q',{u:'pct'}),
+  F('fab.cut','Hao hụt cắt (BOM)','q',{u:'pct'}),
+  F('fab.scrap','Hao hụt phế liệu (BOM)','q',{u:'pct'}),
+  F('fab.nde','Yêu cầu NDE','text'),
+  F('fab.pwht','PWHT','text'),
+  F('fab.impact','Thử va đập','text'),
+  F('fab.tol','Dung sai chung','text'),
+  F('fab.mdmt_result','Đánh giá MDMT (UCS-66): kết quả','text',{help:'exempt / impact_tested; bỏ trống = NOT_EVALUATED'}),
+  F('fab.mdmt_basis','Đánh giá MDMT: căn cứ','text',{req:S=>has(fv(S,'fab.mdmt_result'))}),
+  F('fab.mdmt_by','Đánh giá MDMT: người đánh giá','text',{req:S=>has(fv(S,'fab.mdmt_result'))}),
+  F('fab.pwht_result','Xác định PWHT (UCS-56): kết quả','text'),
+  F('fab.pwht_basis','Xác định PWHT: căn cứ','text',{req:S=>has(fv(S,'fab.pwht_result'))}),
+  F('fab.pwht_by','Xác định PWHT: người đánh giá','text',{req:S=>has(fv(S,'fab.pwht_result'))}),
+];
+const LOAD_KEYS = [['wind','Gió'],['seismic','Động đất'],['piping_loads','Tải đường ống lên vòi'],['snow','Tuyết'],['thermal','Nhiệt'],['transport','Vận chuyển'],['lifting','Nâng hạ']];
+const LOADS = [];
+for (const [k, l] of LOAD_KEYS) {
+  const m = `loads.${k}.mode`;
+  LOADS.push(F(m, l, 'sel', {opts:[['none','chưa có số liệu'],['na','không áp dụng (ghi lý do)'],['values','có số liệu']]}));
+  LOADS.push(F(`loads.${k}.reason`, `${l}: lý do không áp dụng`, 'text', {show2:S=>fv(S,m)==='na',req:S=>fv(S,m)==='na'}));
+  if (k === 'lifting') {
+    LOADS.push(F('loads.lifting.impact','Nâng hạ: hệ số động','num',{show2:S=>fv(S,m)==='values',req:S=>fv(S,m)==='values'}));
+  } else {
+    LOADS.push(F(`loads.${k}.shear`, `${l}: lực cắt chân`, 'q', {u:'force',show2:S=>fv(S,m)==='values'}));
+    LOADS.push(F(`loads.${k}.moment`, `${l}: mô men chân`, 'q', {u:'mom',show2:S=>fv(S,m)==='values'}));
+  }
+  LOADS.push(F(`loads.${k}.basis`, `${l}: căn cứ (tiêu chuẩn, phiên bản)`, 'text', {show2:S=>fv(S,m)==='values'}));
+}
+const EXT = [
+  F('ext.sh_A','Thân: hệ số A (II-D Fig. G)','num',{help:'đọc từ biểu đồ bản quyền; skill không tự xấp xỉ'}),
+  F('ext.sh_B','Thân: hệ số B (biểu đồ vật liệu)','q',{u:'str'}),
+  F('ext.sh_E','Thân: mô đun E (khi A nằm trái đường vật liệu)','q',{u:'str'}),
+  F('ext.sh_left','Thân: A nằm trái đường vật liệu','bool'),
+  F('ext.sh_src','Thân: nguồn số liệu biểu đồ','text',{req:S=>has(fv(S,'ext.sh_B'))||has(fv(S,'ext.sh_A'))}),
+  F('ext.sh_status','Thân: trạng thái','sel',{opts:DATA_ST.map(x=>[x,x])}),
+  F('ext.hd_B','Đáy: hệ số B','q',{u:'str'}),
+  F('ext.hd_E','Đáy: mô đun E','q',{u:'str'}),
+  F('ext.hd_left','Đáy: A nằm trái đường vật liệu','bool'),
+  F('ext.hd_src','Đáy: nguồn số liệu biểu đồ','text',{req:S=>has(fv(S,'ext.hd_B'))||has(fv(S,'ext.hd_E'))}),
+  F('ext.hd_status','Đáy: trạng thái','sel',{opts:DATA_ST.map(x=>[x,x])}),
+];
+/* tank */
+const T_PROCESS = [
+  F('tk.fluid','Lưu chất','text',{req:true}),
+  F('tk.G','Tỉ trọng thiết kế G','num',{req:true}),
+  F('tk.Gt','Tỉ trọng nước thử','num',{req:true}),
+  F('tk.H','Mức lỏng thiết kế H','q',{u:'len',req:true}),
+  F('tk.pi','Áp suất trong','q',{u:'dp',req:true,help:'0 kPa nếu khí quyển'}),
+  F('tk.pe','Áp suất ngoài (chân không)','q',{u:'dp',req:true}),
+  F('tk.dmt','Nhiệt độ kim loại thiết kế','q',{u:'temp',req:true}),
+  F('tk.tmax','Nhiệt độ thiết kế lớn nhất','q',{u:'temp',req:true}),
+  F('tk.cas','CA thân','q',{u:'len',req:true}),
+  F('tk.cab','CA đáy','q',{u:'len',req:true}),
+];
+const T_SCOPE = [
+  F('tk.lim_pi','Giới hạn áp suất trong của phần API 650 áp dụng','q',{u:'dp',help:'từ bản API 650 có bản quyền (thiết kế cơ bản / Annex F)'}),
+  F('tk.lim_pe','Giới hạn áp suất ngoài','q',{u:'dp'}),
+  F('tk.lim_t','Giới hạn nhiệt độ thiết kế','q',{u:'temp'}),
+  F('tk.lim_basis','Căn cứ các giới hạn','text'),
+  F('tk.rules_status','Trạng thái các hằng số API 650','sel',{opts:DATA_ST.map(x=>[x,x])}),
+  F('tk.bottom_min','Chiều dày đáy nhỏ nhất (5.4.1)','q',{u:'len'}),
+  F('tk.onefoot_max','Giới hạn đường kính phương pháp 1-foot','q',{u:'len'}),
+];
+const T_GEOM = [
+  F('tk.D','Đường kính danh nghĩa D','q',{u:'len',req:true}),
+  F('tk.Hs','Chiều cao thân','q',{u:'len',req:true}),
+  F('tk.tb','Chiều dày tấm đáy','q',{u:'len'}),
+  F('tk.bmat','Vật liệu đáy','mat'),
+  F('tk.roof','Mái','text',{help:'mái chưa được tính trong v0.1'}),
+  F('tk.plates','Các chiều dày tấm có sẵn (mm)','text'),
+];
+const T_COURSE = [
+  F('id','Tầng','text',{req:true}),
+  F('height','Chiều cao tầng','q',{u:'len',req:true}),
+  F('material','Vật liệu','mat',{req:true}),
+  F('mode','Chiều dày','sel',{opts:[['auto','skill tự chọn'],['given','tôi cho chiều dày']]}),
+  F('nominal_thickness','Chiều dày danh nghĩa','q',{u:'len',req:(S,it)=>iv(it,'mode')==='given',show:it=>iv(it,'mode')==='given'}),
+];
+const T_MAT = [
+  F('key','Mã gọi','text',{req:true}),
+  F('spec','Tiêu chuẩn vật liệu','text',{req:true}),
+  F('fy','Fy','q',{u:'str'}), F('fu','Fu','q',{u:'str'}),
+  F('sd','Sd (Table 5-2)','q',{u:'str'}), F('st','St (Table 5-2)','q',{u:'str'}),
+  F('density','Khối lượng riêng','q',{u:'dens',req:true}),
+  F('source','Nguồn','text'),
+  F('status','Trạng thái xác minh','sel',{opts:DATA_ST.map(x=>[x,x])}),
+];
+const T_MINT = [
+  F('dmax','Đường kính đến','q',{u:'len',help:'bỏ trống = vô cùng (inf)'}),
+  F('t','Chiều dày tối thiểu','q',{u:'len',req:true}),
+];
+
+const iv = (it, k) => ((it && it.vals && it.vals[k]) || {}).v;
+
+function sections(S) {
+  if (isV(S)) return [
+    {id:'docs', t:'Tài liệu nguồn', hint:'Bản vẽ, datasheet, spec… mà các giá trị bên dưới được lấy ra. Ghi ký hiệu (D1, D2…) để dẫn ở cột nguồn.', list:'docs', defs:DOCS, add:'Thêm tài liệu', name:i=>iv(i,'ref')||'Tài liệu'},
+    {id:'project', t:'Dự án', defs:PROJECT.concat(BASIS)},
+    {id:'process', t:'Điều kiện thiết kế', defs:V_PROCESS},
+    {id:'materials', t:'Vật liệu', hint:'Khai báo mỗi vật liệu một lần với một mã gọi, rồi chọn mã đó ở các chi tiết. CSDL đi kèm chỉ là số liệu ví dụ chưa xác minh: kết quả không bao giờ PASS khi dùng nó.', list:'materials', defs:MATERIAL, add:'Thêm vật liệu', name:i=>iv(i,'key')||'Vật liệu'},
+    {id:'geometry', t:'Hình học thân', defs:V_GEOM},
+    {id:'courses', t:'Các đoạn thân (từ dưới lên)', list:'courses', defs:COURSE, add:'Thêm đoạn thân', name:i=>iv(i,'id')||'Đoạn'},
+    {id:'heads', t:'Đáy trên và đáy dưới', list:'heads', defs:HEAD, fixed:true, name:i=>i.pos==='top'?'Đáy trên':'Đáy dưới'},
+    {id:'nozzles', t:'Vòi (nozzle) và lỗ người', hint:'Góc theo chiều kim đồng hồ từ 0° = Bắc, nhìn từ trên xuống. Cao độ tính từ BTL. Vòi trên đáy: chỉ hỗ trợ đặt ở tâm.', list:'nozzles', defs:NOZZLE, add:'Thêm vòi', name:i=>iv(i,'tag')||'Vòi'},
+    {id:'supports', t:'Chân đỡ', defs:SUPPORTS},
+    {id:'lugs', t:'Tai cẩu', defs:LUGS},
+    {id:'fab', t:'Chế tạo và kiểm tra', defs:FAB},
+    {id:'loads', t:'Tải trọng (UG-22)', hint:'Gió, động đất và tải đường ống là bắt buộc: nhập số liệu, hoặc ghi rõ lý do không áp dụng.', defs:LOADS},
+    {id:'ext', t:'Số liệu biểu đồ áp suất ngoài', hint:'Chỉ cần khi có áp suất ngoài. Đọc A, B, E từ ASME II-D có bản quyền; bỏ trống thì kiểm tra áp ngoài là NOT_EVALUATED và skill sẽ báo tỉ số L/Do, Do/t để tra.', defs:EXT, when:S=>has(fv(S,'process.external_pressure'))},
+  ];
+  return [
+    {id:'docs', t:'Tài liệu nguồn', list:'docs', defs:DOCS, add:'Thêm tài liệu', name:i=>iv(i,'ref')||'Tài liệu'},
+    {id:'project', t:'Dự án', defs:PROJECT.filter(d=>d.k!=='project.jurisdiction')},
+    {id:'tprocess', t:'Điều kiện thiết kế', defs:T_PROCESS},
+    {id:'tscope', t:'Phạm vi và hằng số API 650', hint:'Các giá trị này lấy từ bản API 650 có bản quyền của dự án; skill không tự điền.', defs:T_SCOPE},
+    {id:'tmint', t:'Bảng chiều dày thân tối thiểu (5.6.1.1)', list:'tmint', defs:T_MINT, add:'Thêm dòng', name:(i,n)=>'Dòng '+(n+1)},
+    {id:'tmat', t:'Vật liệu', list:'tmat', defs:T_MAT, add:'Thêm vật liệu', name:i=>iv(i,'key')||'Vật liệu'},
+    {id:'tgeom', t:'Hình học', defs:T_GEOM},
+    {id:'tcourses', t:'Các tầng thân (từ dưới lên)', list:'tcourses', defs:T_COURSE, add:'Thêm tầng', name:i=>iv(i,'id')||'Tầng'},
+  ];
+}
+
+/* ---------- value helpers ---------- */
+const fmtN = v => { const n = num(v); return Number.isInteger(n) ? String(n) : String(n); };
+const qv = o => (o && numOk(o.v)) ? `${fmtN(o.v)} ${o.u}` : null;
+const angv = o => (o && numOk(o.v)) ? `${fmtN(o.v)} deg` : null;
+const bv = o => (o && o.v === 'true') ? true : (o && o.v === 'false') ? false : 'none';
+const tv = o => (o && has(o.v)) ? String(o.v).trim() : null;
+const toMPa = o => { if (!o || !numOk(o.v)) return null; const n = num(o.v); return o.u === 'ksi' ? n * 6.894757293168361 : o.u === 'psi' ? n * 0.006894757293168361 : n; };
+const list = s => String(s || '').split(/[,;\s]+/).filter(x => x !== '').map(x => num(x));
+
+function required(def, S, it) { return typeof def.req === 'function' ? !!def.req(S, it) : !!def.req; }
+function visible(def, S, it) {
+  if (def.show && it && !def.show(it)) return false;
+  if (def.show2 && !def.show2(S)) return false;
+  return true;
+}
+function missing(S) {
+  const out = [];
+  for (const sec of sections(S)) {
+    if (sec.when && !sec.when(S)) continue;
+    if (sec.list) {
+      const items = S.lists[sec.list] || [];
+      if (!items.length && ['courses','materials','tcourses','tmat'].includes(sec.list)) out.push({sec:sec.id, label:`${sec.t}: chưa có mục nào`});
+      items.forEach((it, n) => {
+        for (const d of sec.defs) {
+          if (!visible(d, S, it) || !required(d, S, it)) continue;
+          if (!has(iv(it, d.k))) out.push({sec:sec.id, label:`${sec.name(it, n)} · ${d.l}`});
+        }
+      });
+    } else {
+      for (const d of sec.defs) {
+        if (!visible(d, S) || !required(d, S)) continue;
+        if (!has(fv(S, d.k))) out.push({sec:sec.id, label:d.l});
+      }
+    }
+  }
+  if (isV(S)) {
+    const c = (S.lists.courses || []).filter(i => numOk(iv(i,'length')));
+    const tt = S.f['geometry.tangent_to_tangent'];
+    if (c.length && tt && numOk(tt.v)) {
+      const mm = o => num(o.v) * ({mm:1, m:1000, in:25.4}[o.u] || 1);
+      const sum = c.reduce((a, i) => a + mm(i.vals.length), 0) + (S.lists.heads || []).reduce((a, h) => a + (numOk(iv(h,'straight_flange')) ? mm(h.vals.straight_flange) : 0), 0);
+      if (Math.abs(sum - mm(tt)) > 0.5) out.push({sec:'courses', label:`Tổng các đoạn thân + gờ thẳng = ${sum.toFixed(1)} mm ≠ T/T ${mm(tt).toFixed(1)} mm`});
+    }
+    const autoT = (S.lists.courses || []).some(i => iv(i,'mode') !== 'given') || (S.lists.heads || []).some(h => iv(h,'mode') === 'auto');
+    if (autoT && !list(fv(S,'fab.plates')).length) out.push({sec:'fab', label:'Các chiều dày tấm có sẵn (cần khi để skill tự chọn chiều dày)'});
+  }
+  return out;
+}
+
+/* ---------- builders ---------- */
+function buildVessel(S) {
+  const g = k => S.f[k] || {};
+  const Q = k => qv(g(k)), T = k => tv(g(k)), A = k => angv(g(k)), B = k => bv(g(k));
+  const N = (o, d = 'none') => o === null || o === undefined ? d : o;
+  const I = (it, k) => (it.vals[k] || {});
+  const today = new Date().toISOString().slice(0, 10);
+  const mats = {};
+  for (const m of S.lists.materials || []) {
+    const key = tv(I(m,'key')); if (!key) continue;
+    const mode = iv(m,'mode') || 'db';
+    if (mode === 'db') mats[key] = {db_id: tv(I(m,'db_id'))};
+    else if (mode === 'non_pressure') mats[key] = {non_pressure: true, spec: tv(I(m,'spec')), density: N(qv(I(m,'density'))),
+      min_yield: N(qv(I(m,'fy'))), verification_status: tv(I(m,'status')) || 'USER_SUPPLIED_UNVERIFIED'};
+    else mats[key] = {record: {id: key + '_USER', spec: tv(I(m,'spec')), grade: tv(I(m,'grade')) || '-',
+      product_form: tv(I(m,'product_form')) || '',
+      allowable_stress: {temperature_degC: list(iv(m,'s_temps')), S_MPa: list(iv(m,'s_values'))},
+      interpolation: iv(m,'interp') === 'true' ? 'linear between tabulated temperatures' : '',
+      min_tensile_MPa: toMPa(I(m,'fu')), min_yield_MPa: toMPa(I(m,'fy')),
+      density_kg_m3: numOk(iv(m,'density')) ? num(iv(m,'density')) : null,
+      source_document: tv(I(m,'source_document')) || '', table_reference: '', edition: T('project.code_edition') || '',
+      verified_by: tv(I(m,'verified_by')), verified_on: tv(I(m,'verified_on')),
+      verification_status: tv(I(m,'status')) || 'USER_SUPPLIED_UNVERIFIED'}};
+  }
+  const heads = {};
+  for (const h of S.lists.heads || []) {
+    const typ = iv(h,'type'), auto = iv(h,'mode') === 'auto';
+    const o = {type: typ || null};
+    if (typ === 'ellipsoidal') o.aspect_ratio = numOk(iv(h,'aspect_ratio')) ? num(iv(h,'aspect_ratio')) : null;
+    if (typ === 'torispherical') { o.crown_radius = N(qv(I(h,'crown_radius'))); o.knuckle_radius = N(qv(I(h,'knuckle_radius'))); }
+    Object.assign(o, {straight_flange: N(qv(I(h,'straight_flange'))), material: tv(I(h,'material')), construction: iv(h,'construction') || null});
+    if (iv(h,'construction') === 'welded') o.joint_efficiency = numOk(iv(h,'joint_efficiency')) ? num(iv(h,'joint_efficiency')) : null;
+    o.nominal_thickness = auto ? 'auto' : N(qv(I(h,'nominal_thickness')));
+    o.min_thickness_after_forming = N(qv(I(h,'min_thickness_after_forming')));
+    o.forming_allowance = N(qv(I(h,'forming_allowance')));
+    heads[h.pos] = o;
+  }
+  const nozzles = (S.lists.nozzles || []).map(n => {
+    const loc = iv(n,'location') || 'shell', plate = iv(n,'neck_type') === 'plate';
+    const neck = plate
+      ? {type:'plate', od:N(qv(I(n,'neck_od'))), thickness:N(qv(I(n,'neck_thickness'))), material:tv(I(n,'neck_material')),
+         ...(has(iv(n,'equivalent_nps')) ? {equivalent_nps:String(iv(n,'equivalent_nps'))} : {}),
+         seam_joint_efficiency: numOk(iv(n,'seam_E')) ? num(iv(n,'seam_E')) : null}
+      : {type:'pipe', nps:iv(n,'nps') || null, schedule:iv(n,'schedule') || null, material:tv(I(n,'neck_material'))};
+    let flange = 'none';
+    if (iv(n,'fl_on') === 'true') {
+      flange = {standard: tv(I(n,'fl_standard')) || '', class: tv(I(n,'fl_class')) || '', type: iv(n,'fl_type') || 'WN',
+        facing: iv(n,'fl_facing') || 'RF', material: tv(I(n,'fl_material')),
+        rating_at_design_temperature: N(qv(I(n,'fl_rating')))};
+      if (has(iv(n,'fl_rating'))) { flange.rating_source = tv(I(n,'fl_rating_source')) || 'not stated';
+        flange.rating_status = iv(n,'fl_rating_status') || 'USER_SUPPLIED_UNVERIFIED'; }
+      if (numOk(iv(n,'fl_od'))) {
+        flange.dimensions_source = tv(I(n,'fl_dims_source')) || 'not stated';
+        flange.dimensions_status = 'USER_SUPPLIED_UNVERIFIED';
+        flange.dimensions = {od:qv(I(n,'fl_od')), thickness:N(qv(I(n,'fl_thk'))), hub_od:N(qv(I(n,'fl_hub'))),
+          length_through_hub:N(qv(I(n,'fl_hublen'))), bolt_circle:N(qv(I(n,'fl_bc'))),
+          bolt_holes: numOk(iv(n,'fl_holes')) ? Math.round(num(iv(n,'fl_holes'))) : null, bolt_hole_diameter:N(qv(I(n,'fl_hole_d'))),
+          bolt_size: tv(I(n,'fl_bolt')) || '', raised_face_od:N(qv(I(n,'fl_rf_od'))), raised_face_height:N(qv(I(n,'fl_rf_h')))};
+      }
+      if (iv(n,'fl_blind') === 'true') flange.blind_cover = true;
+      if (iv(n,'fl_bolting_supply') === 'true') { flange.supply_bolting = true;
+        flange.gasket = tv(I(n,'fl_gasket')) || 'not specified'; flange.bolting = tv(I(n,'fl_bolting')) || 'not specified'; }
+    }
+    const pad = iv(n,'pad_on') === 'true' ? {thickness:N(qv(I(n,'pad_t'))), outside_diameter:N(qv(I(n,'pad_od'))), material:tv(I(n,'pad_material'))} : 'none';
+    const w = [qv(I(n,'w_noz')), qv(I(n,'w_pad')), qv(I(n,'w_in'))];
+    const welds = w.some(x => x) ? {nozzle_outer_leg:N(w[0]), pad_outer_leg:N(w[1]), inner_leg:N(w[2])} : 'none';
+    const o = {tag: tv(I(n,'tag')), service: tv(I(n,'service')) || '', location: loc};
+    if (loc === 'shell') { o.elevation = N(qv(I(n,'elevation'))); o.orientation = N(angv(I(n,'orientation'))); }
+    Object.assign(o, {projection: N(qv(I(n,'projection'))), neck, attachment: iv(n,'attachment') || 'set_in',
+      inward_projection: N(qv(I(n,'inward_projection'))), flange, pad, welds});
+    if (iv(n,'access_opening') === 'true') o.access_opening = true;
+    return o;
+  });
+  const sOn = g('supports.on').v === 'true';
+  const supports = sOn ? {type:'legs', count: numOk(g('supports.count').v) ? Math.round(num(g('supports.count').v)) : null,
+    orientation_start: N(A('supports.orientation_start')), top_elevation: N(Q('supports.top_elevation')),
+    leg: {section: T('supports.section') || '', od: N(Q('supports.od')), wall: N(Q('supports.wall')), material: T('supports.material')},
+    base_plate: {length: N(Q('supports.bp_length')), width: N(Q('supports.bp_width')), thickness: N(Q('supports.bp_thk')),
+      material: T('supports.bp_material'), anchor_holes: numOk(g('supports.bp_holes').v) ? Math.round(num(g('supports.bp_holes').v)) : 0,
+      anchor_hole_diameter: N(Q('supports.bp_hole_d')), anchor_spacing: N(Q('supports.bp_spacing')), anchor_bolt: T('supports.anchor_bolt') || ''}} : 'none';
+  const geometry = {orientation: T('geometry.orientation') || 'vertical', diameter_basis: 'ID', diameter: N(Q('geometry.diameter')),
+    tangent_to_tangent: N(Q('geometry.tangent_to_tangent')), bottom_tangent_elevation: N(Q('geometry.bottom_tangent_elevation')),
+    shell_courses: (S.lists.courses || []).map(c => ({id: tv(I(c,'id')), length: N(qv(I(c,'length'))), material: tv(I(c,'material')),
+      nominal_thickness: iv(c,'mode') === 'given' ? N(qv(I(c,'nominal_thickness'))) : 'auto',
+      long_seam_orientation: N(angv(I(c,'long_seam_orientation')))})),
+    heads, nozzles, supports, insulation: 'none'};
+  if (g('lugs.on').v === 'true') {
+    const al = [Q('lugs.allow_t'), Q('lugs.allow_s'), Q('lugs.allow_b')];
+    geometry.lifting_lugs = {count: numOk(g('lugs.count').v) ? Math.round(num(g('lugs.count').v)) : null,
+      orientation_start: N(A('lugs.orientation_start')), elevation: N(Q('lugs.elevation')), thickness: N(Q('lugs.thickness')),
+      height: N(Q('lugs.height')), projection: N(Q('lugs.projection')), hole_diameter: N(Q('lugs.hole_diameter')),
+      hole_edge_distance: N(Q('lugs.hole_edge_distance')), material: T('lugs.material'),
+      allowables: al.every(x => x) ? {tension: al[0], shear: al[1], bearing: al[2]} : 'none'};
+  }
+  const jt = k => numOk(g(k).v) ? Math.round(num(g(k).v)) : null;
+  const plates = list(T('fab.plates'));
+  const assess = (r, b, w) => T(r) ? {result: T(r), basis: T(b) || '', by: T(w) || ''} : 'none';
+  const fabrication = {joints: {
+      shell_longitudinal: {category:'A', joint_type: jt('fab.jl_type'), radiography: g('fab.jl_rt').v || null},
+      shell_circumferential: {category:'B', joint_type: jt('fab.jc_type'), radiography: g('fab.jc_rt').v || null},
+      head_to_shell: {category:'B', joint_type: jt('fab.jh_type'), radiography: g('fab.jh_rt').v || null}},
+    spot_rt_meets_uw11a5b: B('fab.spot_rt'),
+    plate_thicknesses: plates.length ? {values: plates, unit: 'mm'} : 'none',
+    plate_undertolerance: N(Q('fab.plate_ut')), pipe_undertolerance: N(Q('fab.pipe_ut')),
+    cutting_allowance: N(Q('fab.cut')), scrap_allowance: N(Q('fab.scrap')),
+    nde: T('fab.nde') || 'not stated', pwht: T('fab.pwht') || 'not stated', impact_testing: T('fab.impact') || 'not stated',
+    mdmt_assessment: assess('fab.mdmt_result','fab.mdmt_basis','fab.mdmt_by'),
+    pwht_assessment: assess('fab.pwht_result','fab.pwht_basis','fab.pwht_by'),
+    general_tolerances: T('fab.tol') || 'not specified'};
+  const loads = {};
+  for (const [k] of LOAD_KEYS) {
+    const mode = g(`loads.${k}.mode`).v || 'none';
+    if (mode === 'na') loads[k] = {not_applicable: T(`loads.${k}.reason`) || ''};
+    else if (mode === 'values') {
+      const o = {};
+      if (k === 'lifting') { if (numOk(g('loads.lifting.impact').v)) o.impact_factor = num(g('loads.lifting.impact').v); }
+      else { const sh = Q(`loads.${k}.shear`), mo = Q(`loads.${k}.moment`); if (sh) o.base_shear = sh; if (mo) o.base_moment = mo; }
+      if (T(`loads.${k}.basis`)) o.basis = T(`loads.${k}.basis`);
+      loads[k] = Object.keys(o).length ? o : 'none';
+    } else loads[k] = 'none';
+  }
+  const ext = {shell: 'none', heads: 'none'};
+  if (has(fv(S,'process.external_pressure'))) {
+    if (T('ext.sh_src') && (Q('ext.sh_B') || (B('ext.sh_left') === true && numOk(g('ext.sh_A').v) && Q('ext.sh_E')))) {
+      ext.shell = {source: T('ext.sh_src'), status: g('ext.sh_status').v || 'USER_SUPPLIED_UNVERIFIED', left_of_material_line: B('ext.sh_left') === true};
+      if (numOk(g('ext.sh_A').v)) ext.shell.A = num(g('ext.sh_A').v);
+      if (Q('ext.sh_B')) ext.shell.B = Q('ext.sh_B');
+      if (Q('ext.sh_E')) ext.shell.E = Q('ext.sh_E');
+    }
+    if (T('ext.hd_src') && (Q('ext.hd_B') || (B('ext.hd_left') === true && Q('ext.hd_E')))) {
+      ext.heads = {source: T('ext.hd_src'), status: g('ext.hd_status').v || 'USER_SUPPLIED_UNVERIFIED', left_of_material_line: B('ext.hd_left') === true};
+      if (Q('ext.hd_B')) ext.heads.B = Q('ext.hd_B');
+      if (Q('ext.hd_E')) ext.heads.E = Q('ext.hd_E');
+    }
+  }
+  const locked = g('design_basis.locked').v === 'true';
+  return {
+    schema: 'pv-design/vessel@1',
+    project: {project_id: T('project.project_id'), equipment_tag: T('project.equipment_tag'), description: T('project.description'),
+      customer: T('project.customer') || '', design_code: 'ASME_VIII_1', code_edition: T('project.code_edition'),
+      addenda: T('project.addenda') || 'none', units_system: 'SI', design_status: 'PRELIMINARY', revision: T('project.revision'),
+      data_status: g('project.data_status').v || 'DEMO_SAMPLE', jurisdiction: T('project.jurisdiction') || 'none',
+      prepared_by: T('project.prepared_by') || '', date: today},
+    design_basis: {locked, confirmed_by: T('design_basis.confirmed_by') || 'none', confirmed_on: T('design_basis.confirmed_on') || 'none', notes: []},
+    process: {fluid: T('process.fluid'), fluid_phase: g('process.fluid_phase').v || null,
+      lethal_service: B('process.lethal_service'), cyclic_service: B('process.cyclic_service'),
+      operating_pressure: N(Q('process.operating_pressure')), design_pressure: N(Q('process.design_pressure')),
+      operating_temperature: N(Q('process.operating_temperature')), design_temperature: N(Q('process.design_temperature')),
+      mdmt: N(Q('process.mdmt')), external_pressure: N(Q('process.external_pressure')),
+      external_design_temperature: N(Q('process.external_design_temperature')), required_volume: N(Q('process.required_volume')),
+      liquid_level: N(Q('process.liquid_level')), liquid_density: N(Q('process.liquid_density')),
+      corrosion_allowance: N(Q('process.corrosion_allowance')), test_type: g('process.test_type').v || null,
+      test_basis: g('process.test_basis').v || null, test_temperature: N(Q('process.test_temperature')),
+      test_position: g('process.test_position').v || 'vertical', test_fluid_density: N(Q('process.test_fluid_density'))},
+    materials: mats, geometry, fabrication, loads, external_pressure_data: ext,
+    code_reference_verification: {verified: []},
+  };
+}
+
+function buildTank(S) {
+  const g = k => S.f[k] || {};
+  const Q = k => qv(g(k)), T = k => tv(g(k));
+  const N = (o, d = 'none') => o === null || o === undefined ? d : o;
+  const n = k => numOk(g(k).v) ? num(g(k).v) : null;
+  const mats = {};
+  for (const m of S.lists.tmat || []) {
+    const key = iv(m,'key'); if (!has(key)) continue;
+    const q = k => qv(m.vals[k] || {});
+    mats[String(key).trim()] = {spec: tv(m.vals.spec || {}) || '', Fy: N(q('fy')), Fu: N(q('fu')), Sd: N(q('sd')), St: N(q('st')),
+      density: N(q('density')), source: tv(m.vals.source || {}) || '', verification_status: iv(m,'status') || 'USER_SUPPLIED_UNVERIFIED'};
+  }
+  const plates = list(T('tk.plates'));
+  const courses = S.lists.tcourses || [];
+  return {
+    schema: 'pv-design/tank@1',
+    project: {project_id: T('project.project_id'), equipment_tag: T('project.equipment_tag'), description: T('project.description'),
+      design_code: 'API_650', code_edition: T('project.code_edition'), revision: T('project.revision'),
+      data_status: g('project.data_status').v || 'DEMO_SAMPLE'},
+    design_basis: {locked: g('design_basis.locked').v === 'true'},
+    process: {fluid: T('tk.fluid'), design_specific_gravity: n('tk.G'), test_specific_gravity: n('tk.Gt'),
+      design_liquid_level: N(Q('tk.H')), internal_pressure: N(Q('tk.pi')), external_pressure: N(Q('tk.pe')),
+      design_metal_temperature: N(Q('tk.dmt')), max_design_temperature: N(Q('tk.tmax')),
+      corrosion_allowance_shell: N(Q('tk.cas')), corrosion_allowance_bottom: N(Q('tk.cab'))},
+    scope_limits: {max_internal_pressure: N(Q('tk.lim_pi')), max_external_pressure: N(Q('tk.lim_pe')),
+      max_design_temperature: N(Q('tk.lim_t')), basis: T('tk.lim_basis') || ''},
+    materials: mats,
+    api650_rules: {status: g('tk.rules_status').v || 'USER_SUPPLIED_UNVERIFIED',
+      min_shell_thickness: (S.lists.tmint || []).map(r => ({max_diameter: qv(r.vals.dmax || {}) || 'inf', thickness: N(qv(r.vals.t || {}))})),
+      bottom_min_thickness: N(Q('tk.bottom_min')), one_foot_method_max_diameter: N(Q('tk.onefoot_max'))},
+    geometry: {nominal_diameter: N(Q('tk.D')), shell_height: N(Q('tk.Hs')),
+      courses: courses.map(c => ({id: tv(c.vals.id || {}), height: N(qv(c.vals.height || {})), material: tv(c.vals.material || {}),
+        nominal_thickness: iv(c,'mode') === 'given' ? N(qv(c.vals.nominal_thickness || {})) : 'auto'})),
+      bottom_plate_thickness: N(Q('tk.tb')), bottom_material: T('tk.bmat') || (courses[0] ? tv(courses[0].vals.material || {}) : null),
+      roof: T('tk.roof') || 'not stated'},
+    fabrication: {plate_thicknesses: plates.length ? {values: plates, unit: 'mm'} : 'none'},
+  };
+}
+const build = S => isV(S) ? buildVessel(S) : buildTank(S);
+
+/* ---------- source register ---------- */
+function registerRows(S) {
+  const rows = [];
+  for (const sec of sections(S)) {
+    if (sec.list === 'docs' || (sec.when && !sec.when(S))) continue;
+    if (sec.list) {
+      (S.lists[sec.list] || []).forEach((it, n) => {
+        const parts = sec.defs.filter(d => visible(d, S, it) && has(iv(it, d.k)))
+          .map(d => `${d.k}=${iv(it, d.k)}${it.vals[d.k].u && d.t === 'q' ? ' ' + it.vals[d.k].u : ''}`);
+        rows.push({field: `${sec.list}[${sec.name(it, n)}]`, value: parts.join('; ') || '—', cls: it.src || 'USER', ref: it.ref || '', remark: ''});
+      });
+    } else {
+      for (const d of sec.defs) {
+        if (!visible(d, S)) continue;
+        const o = S.f[d.k] || {};
+        const val = has(o.v) ? (d.t === 'q' ? `${o.v} ${o.u}` : d.t === 'ang' ? `${o.v} deg` : String(o.v)) : 'none';
+        if (!has(o.v) && !required(d, S)) continue;
+        rows.push({field: d.k, value: val, cls: has(o.v) ? (o.src || 'USER') : 'NOT_SUPPLIED', ref: o.ref || '', remark: has(o.v) ? '' : 'bắt buộc, chưa có'});
+      }
+    }
+  }
+  return rows;
+}
+function registerMd(S) {
+  const pid = fv(S,'project.project_id') || '<PROJECT_ID>', tag = fv(S,'project.equipment_tag') || '<TAG>';
+  const esc = s => String(s).replace(/\|/g, '\\|');
+  const L = [`# Source register — ${pid} / ${tag}`, '',
+    'Generated by the design request form (tank-vessel-design skill, workflow step 0). Every value in the input file appears below with its source.', '',
+    '## Documents', '', '| Ref | Document | Number / revision / date | Status stated on it |', '|---|---|---|---|'];
+  for (const d of S.lists.docs || []) L.push(`| ${esc(iv(d,'ref') || '')} | ${esc(iv(d,'document') || '')} | ${esc(iv(d,'number') || '')} | ${esc(iv(d,'doc_status') || '')} |`);
+  L.push('', '## Source classes', '', '`DWG` drawing · `DATASHEET` · `SPEC` specification · `USER` typed by the user · `INFERRED` read from a view, to confirm · `USER_ASSUMPTION` chosen by the user as an assumption · `NOT_SUPPLIED`.',
+    '', '## Values', '', '| Input field | Value | Class | Ref | Remark |', '|---|---|---|---|---|');
+  for (const r of registerRows(S)) L.push(`| ${esc(r.field)} | ${esc(r.value)} | ${r.cls} | ${esc(r.ref)} | ${esc(r.remark)} |`);
+  L.push('', '## Conflicts between sources', '', (fv(S,'notes.conflicts') || '(none recorded in the form)'), '',
+    '## Still missing (required)', '');
+  const m = missing(S);
+  L.push(...(m.length ? m.map(x => `- ${x.label}`) : ['- nothing required is missing']));
+  return L.join('\n') + '\n';
+}
+
+/* ---------- YAML with source comments ---------- */
+function yaml(obj, S) {
+  const srcOf = {};
+  for (const d of [].concat(...sections(S).filter(s => !s.list).map(s => s.defs))) {
+    const o = S.f[d.k]; if (o && has(o.v)) srcOf[d.k] = (o.src || 'USER') + (o.ref ? ' ' + o.ref : '');
+  }
+  const pathMap = {'process': 'process', 'project': 'project'};
+  const scalar = v => v === null || v === undefined ? 'null' : typeof v === 'boolean' || typeof v === 'number' ? String(v)
+    : (v === 'none' || v === 'auto' || v === 'inf') ? v : JSON.stringify(v);
+  const out = [];
+  const walk = (o, ind, path) => {
+    const pad = ' '.repeat(ind);
+    for (const [k, v] of Object.entries(o)) {
+      const p = path ? path + '.' + k : k;
+      if (Array.isArray(v)) {
+        if (!v.length) { out.push(`${pad}${k}: []`); continue; }
+        out.push(`${pad}${k}:`);
+        for (const it of v) {
+          if (it && typeof it === 'object') {
+            const lines = []; const save = out.length; walk(it, ind + 4, p);
+            const added = out.splice(save);
+            added[0] = pad + '  - ' + added[0].trimStart();
+            out.push(...added);
+          } else out.push(`${pad}  - ${scalar(it)}`);
+        }
+      } else if (v && typeof v === 'object') {
+        if (!Object.keys(v).length) { out.push(`${pad}${k}: {}`); continue; }
+        out.push(`${pad}${k}:`); walk(v, ind + 2, p);
+      } else {
+        const c = srcOf[p] ? `   # ${srcOf[p]}` : '';
+        out.push(`${pad}${k}: ${scalar(v)}${c}`);
+      }
+    }
+  };
+  walk(obj, 0, '');
+  return '# pv-design input generated by the design request form — check, then run: python pv_design/pv.py validate <file>\n' + out.join('\n') + '\n';
+}
+
+/* ---------- state ---------- */
+function blankState(kind) {
+  const S = {kind, f: {}, lists: {docs: [], materials: [], courses: [], heads: [], nozzles: [], tmat: [], tcourses: [], tmint: []}};
+  S.lists.heads = [{pos:'top', src:'USER', ref:'', vals:{mode:{v:'given'}}}, {pos:'bottom', src:'USER', ref:'', vals:{mode:{v:'given'}}}];
+  S.f['project.data_status'] = {v:'DEMO_SAMPLE'};
+  S.f['geometry.orientation'] = {v:'vertical'};
+  S.f['process.test_position'] = {v:'vertical'};
+  return S;
+}
+function q(v, u, src = 'USER_ASSUMPTION', ref = 'ví dụ') { return {v: String(v), u, src, ref}; }
+function t(v, src = 'USER_ASSUMPTION', ref = 'ví dụ') { return {v: String(v), src, ref}; }
+function item(vals, src = 'USER_ASSUMPTION', ref = 'ví dụ') {
+  const o = {}; for (const [k, v] of Object.entries(vals)) o[k] = Array.isArray(v) ? {v: String(v[0]), u: v[1]} : {v: String(v)};
+  return {src, ref, vals: o};
+}
+function demoVessel() {
+  const S = blankState('vessel'), f = S.f;
+  Object.assign(f, {
+    'project.project_id': t('PV-DEMO-001'), 'project.equipment_tag': t('V-101'), 'project.description': t('Vertical compressed-air receiver (demonstration)'),
+    'project.customer': t('Internal demonstration'), 'project.code_edition': t('2023'), 'project.revision': t('00'),
+    'project.jurisdiction': t('TBD'), 'project.data_status': {v:'DEMO_SAMPLE'}, 'design_basis.locked': {v:'false'},
+    'process.fluid': t('Compressed air (dry)'), 'process.fluid_phase': {v:'gas'}, 'process.lethal_service': {v:'false'}, 'process.cyclic_service': {v:'false'},
+    'process.operating_pressure': q(0.8,'MPa(g)'), 'process.design_pressure': q(1.0,'MPa(g)'), 'process.operating_temperature': q(40,'degC'),
+    'process.design_temperature': q(80,'degC'), 'process.mdmt': q(-10,'degC'), 'process.external_pressure': q(0.1,'MPa'),
+    'process.external_design_temperature': q(80,'degC'), 'process.required_volume': q(3.5,'m3'), 'process.corrosion_allowance': q(1.5,'mm'),
+    'process.test_type': {v:'hydrostatic'}, 'process.test_basis': {v:'MAWP'}, 'process.test_temperature': q(20,'degC'),
+    'process.test_position': {v:'vertical'}, 'process.test_fluid_density': q(1000,'kg/m3'),
+    'geometry.orientation': {v:'vertical'}, 'geometry.diameter': q(1200,'mm'), 'geometry.tangent_to_tangent': q(3000,'mm'),
+    'geometry.bottom_tangent_elevation': q(1000,'mm'),
+    'supports.on': {v:'true'}, 'supports.count': t(4), 'supports.orientation_start': t(45), 'supports.top_elevation': q(400,'mm'),
+    'supports.section': t('Pipe 114.3x6.02 (DN100 SCH40)'), 'supports.od': q(114.3,'mm'), 'supports.wall': q(6.02,'mm'), 'supports.material': t('STRUCT'),
+    'supports.bp_length': q(220,'mm'), 'supports.bp_width': q(220,'mm'), 'supports.bp_thk': q(16,'mm'), 'supports.bp_material': t('STRUCT'),
+    'supports.bp_holes': t(2), 'supports.bp_hole_d': q(24,'mm'), 'supports.bp_spacing': q(150,'mm'), 'supports.anchor_bolt': t('M20'),
+    'lugs.on': {v:'true'}, 'lugs.count': t(2), 'lugs.orientation_start': t(90), 'lugs.elevation': q(2850,'mm'), 'lugs.thickness': q(20,'mm'),
+    'lugs.height': q(160,'mm'), 'lugs.projection': q(110,'mm'), 'lugs.hole_diameter': q(40,'mm'), 'lugs.hole_edge_distance': q(50,'mm'), 'lugs.material': t('STRUCT'),
+    'fab.jl_type': {v:'1'}, 'fab.jl_rt': {v:'spot'}, 'fab.jc_type': {v:'1'}, 'fab.jc_rt': {v:'spot'}, 'fab.jh_type': {v:'1'}, 'fab.jh_rt': {v:'spot'},
+    'fab.spot_rt': {v:'true'}, 'fab.plates': t('6, 8, 10, 12, 14, 16, 18, 20, 22, 25'), 'fab.plate_ut': q(0.3,'mm'), 'fab.pipe_ut': q(12.5,'%'),
+    'fab.cut': q(3,'%'), 'fab.scrap': q(5,'%'), 'fab.nde': t('Spot RT of Category A and B butt welds (demo)'),
+    'loads.wind.mode': {v:'none'}, 'loads.seismic.mode': {v:'none'}, 'loads.piping_loads.mode': {v:'none'},
+    'loads.snow.mode': {v:'na'}, 'loads.snow.reason': t('vertical vessel, no horizontal surfaces holding snow (demo)'),
+    'loads.thermal.mode': {v:'na'}, 'loads.thermal.reason': t('no restrained thermal expansion (demo)'),
+    'loads.transport.mode': {v:'none'}, 'loads.lifting.mode': {v:'values'}, 'loads.lifting.impact': t(2.0), 'loads.lifting.basis': t('DEMO assumption'),
+  });
+  S.lists.docs = [item({ref:'U1', document:'Số liệu ví dụ gõ trong phiếu', number:'—', doc_status:'demo'})];
+  S.lists.materials = [item({key:'PLATE', mode:'db', db_id:'SA-516-70_PLATE_REP'}), item({key:'PIPE', mode:'db', db_id:'SA-106-B_PIPE_REP'}),
+    item({key:'FORGING', mode:'db', db_id:'SA-105_FORGING_REP'}),
+    item({key:'STRUCT', mode:'non_pressure', spec:'ASTM A36 / JIS G3101 SS400', density:[7850,'kg/m3'], fy:[235,'MPa'], status:'REPRESENTATIVE_EXAMPLE'})];
+  S.lists.courses = [item({id:'C1', length:[1500,'mm'], material:'PLATE', mode:'auto', long_seam_orientation:30}),
+    item({id:'C2', length:[1420,'mm'], material:'PLATE', mode:'auto', long_seam_orientation:210})];
+  S.lists.heads = ['top','bottom'].map(pos => Object.assign(item({type:'ellipsoidal', aspect_ratio:2.0, straight_flange:[40,'mm'], material:'PLATE',
+    construction:'seamless', mode:'given', nominal_thickness:[8,'mm'], min_thickness_after_forming:[7.0,'mm']}), {pos}));
+  const fl4 = {fl_on:'true', fl_standard:'ASME B16.5', fl_class:'150', fl_type:'WN', fl_facing:'RF', fl_material:'FORGING',
+    fl_od:[228.6,'mm'], fl_thk:[23.9,'mm'], fl_hub:[134.9,'mm'], fl_hublen:[76.2,'mm'], fl_bc:[190.5,'mm'], fl_holes:8,
+    fl_hole_d:[19.1,'mm'], fl_bolt:'5/8 in', fl_rf_od:[157.2,'mm'], fl_rf_h:[1.6,'mm'], fl_dims_source:'representative B16.5 Cl 150 NPS 4 (verify)'};
+  const fl1 = {fl_on:'true', fl_standard:'ASME B16.5', fl_class:'150', fl_type:'WN', fl_facing:'RF', fl_material:'FORGING',
+    fl_od:[108,'mm'], fl_thk:[14.2,'mm'], fl_hub:[49.3,'mm'], fl_hublen:[55.6,'mm'], fl_bc:[79.4,'mm'], fl_holes:4,
+    fl_hole_d:[15.9,'mm'], fl_bolt:'1/2 in', fl_rf_od:[50.8,'mm'], fl_rf_h:[1.6,'mm'], fl_dims_source:'representative B16.5 Cl 150 NPS 1 (verify)'};
+  const fl2 = Object.assign({}, fl1, {fl_od:[152.4,'mm'], fl_thk:[19.1,'mm'], fl_hub:[77.7,'mm'], fl_hublen:[63.5,'mm'], fl_bc:[120.7,'mm'],
+    fl_hole_d:[19.1,'mm'], fl_bolt:'5/8 in', fl_rf_od:[92.1,'mm'], fl_dims_source:'representative B16.5 Cl 150 NPS 2 (verify)'});
+  S.lists.nozzles = [
+    item(Object.assign({tag:'N1', service:'Air inlet', location:'shell', elevation:[2500,'mm'], orientation:0, projection:[200,'mm'], attachment:'set_in',
+      neck_type:'pipe', nps:'4', schedule:'80', neck_material:'PIPE', fl_rating:[1.83,'MPa(g)'], fl_rating_source:'DEMO value — verify B16.5 Table 2-1.1',
+      fl_rating_status:'USER_SUPPLIED_UNVERIFIED', pad_on:'true', pad_t:[8,'mm'], pad_od:[200,'mm'], pad_material:'PLATE'}, fl4)),
+    item(Object.assign({tag:'N2', service:'Air outlet', location:'shell', elevation:[400,'mm'], orientation:180, projection:[200,'mm'], attachment:'set_in',
+      neck_type:'pipe', nps:'4', schedule:'80', neck_material:'PIPE', pad_on:'true', pad_t:[8,'mm'], pad_od:[200,'mm'], pad_material:'PLATE'}, fl4)),
+    item(Object.assign({tag:'N3', service:'Drain', location:'bottom_head', projection:[150,'mm'], attachment:'set_in', neck_type:'pipe', nps:'1', schedule:'160', neck_material:'PIPE'}, fl1)),
+    item(Object.assign({tag:'N4', service:'Safety valve', location:'top_head', projection:[200,'mm'], attachment:'set_in', neck_type:'pipe', nps:'2', schedule:'160', neck_material:'PIPE'}, fl2)),
+    item(Object.assign({tag:'N5', service:'Pressure gauge', location:'shell', elevation:[2500,'mm'], orientation:90, projection:[150,'mm'], attachment:'set_in',
+      neck_type:'pipe', nps:'1', schedule:'160', neck_material:'PIPE'}, fl1)),
+    item({tag:'M1', service:'Manway', location:'shell', elevation:[900,'mm'], orientation:270, projection:[250,'mm'], attachment:'set_in', access_opening:'true',
+      neck_type:'plate', neck_od:[457,'mm'], neck_thickness:[12,'mm'], equivalent_nps:'18', seam_E:0.85, neck_material:'PLATE',
+      fl_on:'true', fl_standard:'ASME B16.5', fl_class:'150', fl_type:'WN', fl_facing:'RF', fl_material:'FORGING',
+      fl_od:[635,'mm'], fl_thk:[39.6,'mm'], fl_hub:[505,'mm'], fl_hublen:[112.7,'mm'], fl_bc:[577.9,'mm'], fl_holes:16, fl_hole_d:[31.8,'mm'],
+      fl_bolt:'1-1/8 in', fl_rf_od:[533.4,'mm'], fl_rf_h:[1.6,'mm'], fl_dims_source:'representative B16.5 Cl 150 NPS 18 (verify)',
+      fl_blind:'true', fl_bolting_supply:'true', fl_gasket:'Flat ring gasket NPS 18 Cl150 RF, ASME B16.21 (material TBD)',
+      fl_bolting:'Stud bolts SA-193 B7 with 2 heavy hex nuts SA-194 2H each (length TBD)',
+      pad_on:'true', pad_t:[8,'mm'], pad_od:[800,'mm'], pad_material:'PLATE'}),
+  ];
+  return S;
+}
+function demoTank() {
+  const S = blankState('tank'), f = S.f;
+  Object.assign(f, {
+    'project.project_id': t('TK-DEMO-001'), 'project.equipment_tag': t('T-201'), 'project.description': t('Atmospheric fire-water storage tank (demonstration)'),
+    'project.code_edition': t('project to state (edition and addendum)'), 'project.revision': t('00'), 'project.data_status': {v:'DEMO_SAMPLE'},
+    'tk.fluid': t('Fresh water'), 'tk.G': t(1.0), 'tk.Gt': t(1.0), 'tk.H': q(8.6,'m'), 'tk.pi': q(0,'kPa'), 'tk.pe': q(0,'kPa'),
+    'tk.dmt': q(10,'degC'), 'tk.tmax': q(50,'degC'), 'tk.cas': q(1.5,'mm'), 'tk.cab': q(1.5,'mm'),
+    'tk.lim_pi': q(0,'kPa'), 'tk.lim_pe': q(0.25,'kPa'), 'tk.lim_t': q(93,'degC'), 'tk.lim_basis': t('DEMO representative values — confirm against the licensed API 650 edition'),
+    'tk.rules_status': {v:'REPRESENTATIVE_EXAMPLE'}, 'tk.bottom_min': q(6,'mm'), 'tk.onefoot_max': q(61,'m'),
+    'tk.D': q(10,'m'), 'tk.Hs': q(9,'m'), 'tk.tb': q(8,'mm'), 'tk.bmat': t('A283C'), 'tk.roof': t('self-supported cone (not designed in v0.1)'),
+    'tk.plates': t('5, 6, 8, 10, 12, 14, 16'),
+  });
+  S.lists.docs = [item({ref:'U1', document:'Số liệu ví dụ gõ trong phiếu', number:'—', doc_status:'demo'})];
+  S.lists.tmint = [item({dmax:[15,'m'], t:[5,'mm']}), item({dmax:[36,'m'], t:[6,'mm']}), item({dmax:[60,'m'], t:[8,'mm']}), item({t:[10,'mm']})];
+  S.lists.tmat = [item({key:'A283C', spec:'ASTM A283/A283M Grade C', fy:[205,'MPa'], fu:[380,'MPa'], sd:[137,'MPa'], st:[154,'MPa'],
+    density:[7850,'kg/m3'], source:'representative Table 5-2 values (DEMO) — verify', status:'REPRESENTATIVE_EXAMPLE'})];
+  S.lists.tcourses = [1,2,3,4,5].map(i => item({id:String(i), height:[1.8,'m'], material:'A283C', mode:'auto'}));
+  return S;
+}
+/*CORE-END*/
+
+/* ================= UI ================= */
+(function () {
+  'use strict';
+  const LS = 'pvform.draft.v1';
+  const $ = id => document.getElementById(id);
+  const store = {
+    get() { try { return JSON.parse(localStorage.getItem(LS) || 'null'); } catch (e) { return null; } },
+    set(v) { try { localStorage.setItem(LS, JSON.stringify(v)); } catch (e) {} },
+  };
+  let st = store.get();
+  let S = st && st.S ? st.S : demoVessel();
+  let isDemo = st ? !!st.isDemo : true;
+  let tab = 'yaml';
+  const other = {};  // keeps the other kind's state while switching
+
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const uid = () => Math.random().toString(36).slice(2, 9);
+
+  function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => t.hidden = true, 3200); }
+
+  function control(def, val, path, S, it) {
+    const id = 'f_' + path.replace(/[^a-zA-Z0-9]/g, '_');
+    const v = val.v === undefined ? '' : val.v;
+    let h = '';
+    const opt = (pairs, cur) => pairs.map(([a, b]) => `<option value="${esc(a)}"${String(cur) === String(a) ? ' selected' : ''}>${esc(b)}</option>`).join('');
+    if (def.t === 'sel') {
+      let pairs = typeof def.opts === 'function' ? def.opts(S) : def.opts;
+      if (!pairs.some(p => p[0] === '') && v === '' && !pairs.some(p => String(p[0]) === String(v))) pairs = [['', '—']].concat(pairs);
+      h = `<select id="${id}" data-p="${esc(path)}" data-f="v">${opt(pairs, v)}</select>`;
+    } else if (def.t === 'mat') {
+      const keys = matOpts(S);
+      if (has(v) && !keys.includes(v)) keys.push(v);
+      h = `<select id="${id}" data-p="${esc(path)}" data-f="v">${opt(keys.map(k => [k, k || '— chọn mã vật liệu']), v)}</select>`;
+    } else if (def.t === 'bool') {
+      h = `<select id="${id}" data-p="${esc(path)}" data-f="v">${opt(BOOL, v)}</select>`;
+    } else if (def.t === 'q') {
+      const units = UNITS[def.u];
+      const u = val.u || units[0];
+      h = `<input id="${id}" inputmode="decimal" data-p="${esc(path)}" data-f="v" value="${esc(v)}" placeholder="${def.req && def.req === true ? 'bắt buộc' : 'bỏ trống = none'}">` +
+          `<select class="unit" aria-label="đơn vị" data-p="${esc(path)}" data-f="u">${opt(units.map(x => [x, x]), u)}</select>`;
+    } else if (def.t === 'ang') {
+      h = `<input id="${id}" inputmode="decimal" data-p="${esc(path)}" data-f="v" value="${esc(v)}"><select class="unit" disabled aria-label="đơn vị"><option>deg</option></select>`;
+    } else if (def.t === 'date') {
+      h = `<input id="${id}" type="date" data-p="${esc(path)}" data-f="v" value="${esc(v)}">`;
+    } else if (def.t === 'area') {
+      h = `<textarea id="${id}" data-p="${esc(path)}" data-f="v">${esc(v)}</textarea>`;
+    } else {
+      h = `<input id="${id}" ${def.t === 'num' || def.t === 'int' ? 'inputmode="decimal"' : ''} data-p="${esc(path)}" data-f="v" value="${esc(v)}" placeholder="${def.help && def.t === 'text' ? '' : ''}">`;
+    }
+    return {id, h};
+  }
+  function srcCtl(path, o) {
+    return `<div class="src"><select aria-label="loại nguồn" data-p="${esc(path)}" data-f="src">${SRC.map(s => `<option${(o.src || 'USER') === s ? ' selected' : ''}>${s}</option>`).join('')}</select>` +
+      `<input aria-label="tham chiếu nguồn" placeholder="tham chiếu (D1 tờ 2…)" data-p="${esc(path)}" data-f="ref" value="${esc(o.ref || '')}"></div>`;
+  }
+  function rowHtml(def, S, it, path, val, withSrc, miss) {
+    const c = control(def, val, path, S, it);
+    const req = required(def, S, it);
+    return `<div class="row${miss ? ' missing' : ''}"><label class="lbl" for="${c.id}">${esc(def.l)}${req ? '<span class="r" title="bắt buộc">*</span>' : ''}` +
+      `<span class="k">${esc(it ? def.k : def.k)}</span>${def.help ? `<span class="h">${esc(def.help)}</span>` : ''}</label>` +
+      `<div class="inp">${c.h}</div>${withSrc ? srcCtl(path, val) : '<div></div>'}</div>`;
+  }
+
+  function render() {
+    const secs = sections(S);
+    const miss = missing(S);
+    const missSec = {};
+    miss.forEach(m => missSec[m.sec] = (missSec[m.sec] || 0) + 1);
+    let h = '';
+    secs.forEach((sec, n) => {
+      if (sec.when && !sec.when(S)) return;
+      const bad = missSec[sec.id] || 0;
+      h += `<section class="card blk" id="sec-${sec.id}"><header><span class="no">${String(n + 1).padStart(2, '0')}</span><h2>${esc(sec.t)}</h2>` +
+        `<span class="st${bad ? ' bad' : ''}">${bad ? `thiếu ${bad}` : 'đủ mục bắt buộc'}</span></header>`;
+      if (sec.hint) h += `<p class="hint">${esc(sec.hint)}</p>`;
+      if (sec.list) {
+        const items = S.lists[sec.list] || [];
+        h += '<div class="items">';
+        items.forEach((it, i) => {
+          if (!it.uid) it.uid = uid();
+          const base = `L:${sec.list}:${it.uid}`;
+          h += `<div class="item"><div class="ih"><b>${esc(sec.name(it, i))}</b>`;
+          if (sec.list !== 'docs') h += srcCtl(base, it);
+          if (!sec.fixed) h += `<button type="button" class="btn" data-del="${esc(sec.list)}" data-uid="${it.uid}" aria-label="Xóa ${esc(sec.name(it, i))}">Xóa</button>`;
+          h += '</div><div class="rows">';
+          let lastGroup = null;
+          for (const d of sec.defs) {
+            if (!visible(d, S, it)) continue;
+            if (d.group && d.group !== lastGroup) { h += `<div class="sub">${esc(d.group)}</div>`; lastGroup = d.group; }
+            const val = it.vals[d.k] || {};
+            const m = required(d, S, it) && !has(val.v);
+            h += rowHtml(d, S, it, `${base}:${d.k}`, val, false, m);
+          }
+          h += '</div></div>';
+        });
+        h += '</div>';
+        if (!sec.fixed) h += `<div class="bar" style="margin:10px 0 0"><button type="button" class="btn" data-add="${esc(sec.list)}">+ ${esc(sec.add)}</button></div>`;
+      } else {
+        h += '<div class="rows">';
+        for (const d of sec.defs) {
+          if (!visible(d, S)) continue;
+          const val = S.f[d.k] || {};
+          h += rowHtml(d, S, null, `F:${d.k}`, val, d.t !== 'bool' && d.t !== 'sel' || d.k.startsWith('process.'), required(d, S) && !has(val.v));
+        }
+        h += '</div>';
+      }
+      h += '</section>';
+    });
+    h += `<section class="card blk" id="sec-notes"><header><span class="no">··</span><h2>Ghi chú và mâu thuẫn giữa các nguồn</h2></header>` +
+      `<p class="hint">Nếu hai tài liệu cho hai giá trị khác nhau, ghi cả hai ở đây. Tài liệu gốc (bản vẽ, datasheet) được ưu tiên hơn số gõ lại.</p>` +
+      rowHtml(F('notes.conflicts','Ghi chú','area'), S, null, 'F:notes.conflicts', S.f['notes.conflicts'] || {}, false, false) + '</section>';
+    const active = document.activeElement && document.activeElement.id;
+    $('form').innerHTML = h;
+    if (active && $(active)) $(active).focus();
+    $('toc').innerHTML = secs.filter(s => !(s.when && !s.when(S))).map(s => `<li><a href="#sec-${s.id}">${esc(s.t)}</a>${missSec[s.id] ? ` <span style="color:var(--req)">(${missSec[s.id]})</span>` : ''}</li>`).join('') + '<li><a href="#sec-out">Kết quả</a></li>';
+    $('missCount').textContent = miss.length;
+    $('missCount').classList.toggle('zero', !miss.length);
+    $('missList').innerHTML = miss.slice(0, 60).map(m => `<li><a href="#sec-${m.sec}">${esc(m.label)}</a></li>`).join('') + (miss.length > 60 ? `<li>… và ${miss.length - 60} mục nữa</li>` : '');
+    $('kVessel').setAttribute('aria-pressed', String(isV(S)));
+    $('kTank').setAttribute('aria-pressed', String(!isV(S)));
+    $('demoNote').hidden = !isDemo;
+    renderOut();
+  }
+
+  function outputs() {
+    const obj = build(S);
+    return {obj, json: JSON.stringify(obj, null, 2) + '\n', yaml: yaml(obj, S), reg: registerMd(S)};
+  }
+  function renderOut() {
+    const o = outputs();
+    $('outBox').textContent = tab === 'json' ? o.json : tab === 'reg' ? o.reg : o.yaml;
+    document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === tab)));
+  }
+  const save = () => store.set({S, isDemo});
+
+  function setVal(path, field, value) {
+    const parts = path.split(':');
+    if (parts[0] === 'F') { const k = parts.slice(1).join(':'); S.f[k] = Object.assign({}, S.f[k] || {}, {[field]: value}); }
+    else {
+      const [, lst, u, ...rest] = parts;
+      const it = (S.lists[lst] || []).find(x => x.uid === u); if (!it) return;
+      if (!rest.length) it[field] = value;
+      else { const k = rest.join(':'); it.vals[k] = Object.assign({}, it.vals[k] || {}, {[field]: value}); }
+    }
+  }
+  let rt = null;
+  function onEdit(e) {
+    const el = e.target; if (!el.dataset || !el.dataset.p) return;
+    setVal(el.dataset.p, el.dataset.f, el.value);
+    if (isDemo) { isDemo = false; }
+    save();
+    const structural = el.tagName === 'SELECT';
+    clearTimeout(rt);
+    if (structural) render(); else rt = setTimeout(() => { const y = window.scrollY; render(); window.scrollTo(0, y); }, 500);
+  }
+  $('form').addEventListener('change', onEdit);
+  $('form').addEventListener('input', e => { if (e.target.tagName !== 'SELECT') { const el = e.target; setVal(el.dataset.p, el.dataset.f, el.value); save(); clearTimeout(rt); rt = setTimeout(() => { renderSoft(); }, 400); } });
+  function renderSoft() {   // update counts and outputs without rebuilding inputs (keeps typing smooth)
+    const miss = missing(S);
+    $('missCount').textContent = miss.length;
+    $('missCount').classList.toggle('zero', !miss.length);
+    $('missList').innerHTML = miss.slice(0, 60).map(m => `<li><a href="#sec-${m.sec}">${esc(m.label)}</a></li>`).join('');
+    renderOut();
+  }
+  $('form').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.add) {
+      const lst = b.dataset.add, it = {uid: uid(), src: 'USER', ref: '', vals: {}};
+      if (lst === 'materials') it.vals.mode = {v: 'db'};
+      if (lst === 'courses' || lst === 'tcourses') it.vals.mode = {v: 'auto'};
+      if (lst === 'nozzles') { it.vals.location = {v: 'shell'}; it.vals.neck_type = {v: 'pipe'}; it.vals.attachment = {v: 'set_in'}; it.vals.fl_on = {v: 'true'}; }
+      (S.lists[lst] = S.lists[lst] || []).push(it); isDemo = false; save(); render();
+    } else if (b.dataset.del) {
+      const lst = b.dataset.del;
+      S.lists[lst] = (S.lists[lst] || []).filter(x => x.uid !== b.dataset.uid); save(); render();
+    }
+  });
+  $('kVessel').addEventListener('click', () => { if (isV(S)) return; other.tank = S; S = other.vessel || (isDemo ? demoVessel() : blankState('vessel')); save(); render(); });
+  $('kTank').addEventListener('click', () => { if (!isV(S)) return; other.vessel = S; S = other.tank || (isDemo ? demoTank() : blankState('tank')); save(); render(); });
+  $('bBlank').addEventListener('click', () => { S = blankState(S.kind); isDemo = false; save(); render(); window.scrollTo(0, 0); toast('Đã mở phiếu trống'); });
+  $('bDemo').addEventListener('click', () => { S = isV(S) ? demoVessel() : demoTank(); isDemo = true; save(); render(); toast('Đã nạp dữ liệu ví dụ'); });
+  document.querySelector('.tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { tab = b.dataset.tab; renderOut(); } });
+
+  /* ---- outputs: save, copy, send ---- */
+  let downloads = null, db = null, user = null;
+  const fileBase = () => (isV(S) ? 'vessel_input' : 'tank_input');
+  async function saveFile(name, data, mime) {
+    if (downloads) {
+      try { await downloads.save({filename: name, data}); toast('Đã lưu ' + name); }
+      catch (e) { toast(e && e.code === 'declined' ? 'Đã hủy lưu' : 'Không lưu được ở đây: hãy dùng nút Sao chép'); }
+      return;
+    }
+    if (!window.claude) {   // opened as a local file: an ordinary download works
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([data], {type: mime}));
+      a.download = name; document.body.appendChild(a); a.click(); a.remove();
+      return;
+    }
+    toast('Trang này không lưu được file: hãy dùng nút Sao chép');
+  }
+  $('bSaveJson').addEventListener('click', () => saveFile(fileBase() + '.json', outputs().json, 'application/json'));
+  $('bSaveReg').addEventListener('click', () => saveFile('source_register.md', outputs().reg, 'text/markdown'));
+  $('bCopy').addEventListener('click', () => {
+    const text = $('outBox').textContent;
+    const sel = () => { const r = document.createRange(); r.selectNodeContents($('outBox')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Đã chọn văn bản: nhấn Ctrl+C'); };
+    try { navigator.clipboard.writeText(text).then(() => toast('Đã sao chép'), sel); } catch (e) { sel(); }
+  });
+  $('bSend').addEventListener('click', async () => {
+    const o = outputs(), m = missing(S);
+    try {
+      const id = (fv(S,'project.project_id') || 'REQ').replace(/[^A-Za-z0-9_-]/g, '_') + '_' + new Date().toISOString().replace(/[:.]/g, '-');
+      await db.collection('requests').doc(id).set({created_at: new Date().toISOString(), kind: S.kind,
+        project_id: fv(S,'project.project_id') || '', equipment_tag: fv(S,'project.equipment_tag') || '',
+        input_file: fileBase() + '.json', input_json: o.json, source_register_md: o.reg,
+        missing: m.map(x => x.label), submitted_by: user ? await user.id().catch(() => '') : ''});
+      $('sendNote').hidden = false;
+      $('sendNote').textContent = `Đã gửi (mã ${id}). Quay lại cuộc trò chuyện và nói “đọc phiếu ${id}” để Claude lấy file và chạy skill.`;
+      toast('Đã gửi cho Claude');
+    } catch (e) { toast('Không gửi được: ' + (e && e.message ? e.message : 'lỗi')); }
+  });
+  (async () => {
+    if (!window.claude || !window.claude.use) return;
+    try { downloads = await window.claude.use('downloads'); } catch (e) { downloads = null; }
+    try { db = await window.claude.use('db'); } catch (e) { db = null; }
+    try { user = await window.claude.use('user'); } catch (e) { user = null; }
+    $('bSend').hidden = !db;
+  })();
+
+  // read-only hook for pages built on this form (the web calculator)
+  window.pvForm = {kind: () => S.kind, outputs, missing: () => missing(S), project: () => ({
+    id: fv(S,'project.project_id') || '', tag: fv(S,'project.equipment_tag') || '', rev: fv(S,'project.revision') || ''})};
+  render();
+})();
+</script>

@@ -50,6 +50,15 @@ Never mix: an input is one family; the validators refuse the other schema.
 Geometry/CAD/drawings: vertical vessels on legs. Horizontal vessels, skirts,
 saddles, cones, flat heads, jackets: not in v0.1.
 
+## Special configurations
+
+| Configuration | What the engine covers | OUT_OF_SCOPE (state it, do not substitute) |
+|---|---|---|
+| Vacuum-insulated double-wall cryogenic / LNG tank | inner vessel as a VIII-1 vessel: shell, heads, openings on the head centreline, MAWP, test, weight of the inner vessel | outer jacket (UG-28 external pressure, stiffeners), annular insulation, inner-vessel supports, legs or skirt fixed to the jacket (leave `supports` out of the inner-vessel input), piping between the walls, boil-off and relief sizing |
+| Inner vessel cold-stretched (VIII-1 Mandatory Appendix 44) | nothing specific: ordinary VIII-1 rules give a conventional design, thicker than the stretched one | Appendix 44 allowables, stretching procedure and pressure; run the conventional check only when the user accepts it in place of the vendor rule |
+| Off-centre head nozzles (hillside, in the knuckle) | — | UG-37 for those openings |
+| Vendor drawing marked "for quotation only" | values it states, classified DWG in the source register | dimensions it does not state (typically the inner vessel): ask, never scale from the drawing |
+
 ## API 650 module
 
 | Check | Rule | Notes |

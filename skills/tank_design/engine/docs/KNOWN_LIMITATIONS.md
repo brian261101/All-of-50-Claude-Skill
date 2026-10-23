@@ -59,3 +59,13 @@ constants are project inputs. No geometry, CAD, drawings or BOM for tanks.
 - The release gate stops at CALCULATION_VERIFIED; engineering review and
   approval are human acts recorded outside the software.
 - The calculation report is generated in English, SI units.
+
+## Web calculator
+- The browser PDF is laid out by pdfmake from the same report HTML; page
+  breaks and table widths differ from the PyMuPDF report. `pv.py report` after
+  `resume` produces the authoritative PDF; the browser copy is kept as `*_web.pdf`.
+- Pyodide's libm can differ from the local C runtime in the last digit of a
+  float, so the web and local `results_hash` may differ; `resume` therefore
+  compares every result value (relative 1e-9) instead of the hash alone.
+- The page loads Pyodide, pdfmake and html-to-pdfmake from cdn.jsdelivr.net
+  (pinned versions); offline use is not supported.
